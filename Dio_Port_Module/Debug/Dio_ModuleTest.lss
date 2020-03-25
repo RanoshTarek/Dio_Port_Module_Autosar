@@ -1,0 +1,2698 @@
+
+Dio_ModuleTest.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00001072  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         000000c8  00800060  00001072  00001106  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000006  00800128  00800128  000011ce  2**0
+                  ALLOC
+  3 .stab         0000180c  00000000  00000000  000011d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000ed0  00000000  00000000  000029dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+       4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+       8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+       c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+      50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+      54:	11 24       	eor	r1, r1
+      56:	1f be       	out	0x3f, r1	; 63
+      58:	cf e5       	ldi	r28, 0x5F	; 95
+      5a:	d4 e0       	ldi	r29, 0x04	; 4
+      5c:	de bf       	out	0x3e, r29	; 62
+      5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+      60:	11 e0       	ldi	r17, 0x01	; 1
+      62:	a0 e6       	ldi	r26, 0x60	; 96
+      64:	b0 e0       	ldi	r27, 0x00	; 0
+      66:	e2 e7       	ldi	r30, 0x72	; 114
+      68:	f0 e1       	ldi	r31, 0x10	; 16
+      6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+      6c:	05 90       	lpm	r0, Z+
+      6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+      70:	a8 32       	cpi	r26, 0x28	; 40
+      72:	b1 07       	cpc	r27, r17
+      74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+      76:	11 e0       	ldi	r17, 0x01	; 1
+      78:	a8 e2       	ldi	r26, 0x28	; 40
+      7a:	b1 e0       	ldi	r27, 0x01	; 1
+      7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+      7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+      80:	ae 32       	cpi	r26, 0x2E	; 46
+      82:	b1 07       	cpc	r27, r17
+      84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+      86:	0e 94 37 03 	call	0x66e	; 0x66e <main>
+      8a:	0c 94 37 08 	jmp	0x106e	; 0x106e <_exit>
+
+0000008e <__bad_interrupt>:
+      8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <Det_ReportError>:
+      92:	df 93       	push	r29
+      94:	cf 93       	push	r28
+      96:	00 d0       	rcall	.+0      	; 0x98 <Det_ReportError+0x6>
+      98:	00 d0       	rcall	.+0      	; 0x9a <Det_ReportError+0x8>
+      9a:	0f 92       	push	r0
+      9c:	cd b7       	in	r28, 0x3d	; 61
+      9e:	de b7       	in	r29, 0x3e	; 62
+      a0:	9a 83       	std	Y+2, r25	; 0x02
+      a2:	89 83       	std	Y+1, r24	; 0x01
+      a4:	6b 83       	std	Y+3, r22	; 0x03
+      a6:	4c 83       	std	Y+4, r20	; 0x04
+      a8:	2d 83       	std	Y+5, r18	; 0x05
+      aa:	ff cf       	rjmp	.-2      	; 0xaa <Det_ReportError+0x18>
+
+000000ac <Dio_Init>:
+* Parameters (out): None
+* Return value: None
+* Description: Function to Initialize the Dio module.
+************************************************************************************/
+void Dio_Init(const Dio_ConfigType * ConfigPtr)
+{
+      ac:	df 93       	push	r29
+      ae:	cf 93       	push	r28
+      b0:	00 d0       	rcall	.+0      	; 0xb2 <Dio_Init+0x6>
+      b2:	cd b7       	in	r28, 0x3d	; 61
+      b4:	de b7       	in	r29, 0x3e	; 62
+      b6:	9a 83       	std	Y+2, r25	; 0x02
+      b8:	89 83       	std	Y+1, r24	; 0x01
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+	/* check if the input configuration pointer is not a NULL_PTR */
+	if (NULL_PTR == ConfigPtr)
+      ba:	89 81       	ldd	r24, Y+1	; 0x01
+      bc:	9a 81       	ldd	r25, Y+2	; 0x02
+      be:	00 97       	sbiw	r24, 0x00	; 0
+      c0:	41 f4       	brne	.+16     	; 0xd2 <Dio_Init+0x26>
+	{
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID, DIO_INIT_SID,
+      c2:	88 e7       	ldi	r24, 0x78	; 120
+      c4:	90 e0       	ldi	r25, 0x00	; 0
+      c6:	60 e0       	ldi	r22, 0x00	; 0
+      c8:	40 e1       	ldi	r20, 0x10	; 16
+      ca:	20 e1       	ldi	r18, 0x10	; 16
+      cc:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+      d0:	09 c0       	rjmp	.+18     	; 0xe4 <Dio_Init+0x38>
+	{
+		/*
+		 * Set the module state to initialized and point to the PB configuration structure using a global pointer.
+		 * This global pointer is global to be used by other functions to read the PB configuration structures
+		 */
+		Dio_Status       = DIO_INITIALIZED;
+      d2:	81 e0       	ldi	r24, 0x01	; 1
+      d4:	80 93 2a 01 	sts	0x012A, r24
+		Dio_PortChannels = ConfigPtr->Channels; /* address of the first Channels structure --> Channels[0] */
+      d8:	89 81       	ldd	r24, Y+1	; 0x01
+      da:	9a 81       	ldd	r25, Y+2	; 0x02
+      dc:	90 93 29 01 	sts	0x0129, r25
+      e0:	80 93 28 01 	sts	0x0128, r24
+	}
+}
+      e4:	0f 90       	pop	r0
+      e6:	0f 90       	pop	r0
+      e8:	cf 91       	pop	r28
+      ea:	df 91       	pop	r29
+      ec:	08 95       	ret
+
+000000ee <Dio_WriteChannel>:
+* Parameters (out): None
+* Return value: None
+* Description: Function to set a level of a channel.
+************************************************************************************/
+void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
+{
+      ee:	df 93       	push	r29
+      f0:	cf 93       	push	r28
+      f2:	cd b7       	in	r28, 0x3d	; 61
+      f4:	de b7       	in	r29, 0x3e	; 62
+      f6:	27 97       	sbiw	r28, 0x07	; 7
+      f8:	0f b6       	in	r0, 0x3f	; 63
+      fa:	f8 94       	cli
+      fc:	de bf       	out	0x3e, r29	; 62
+      fe:	0f be       	out	0x3f, r0	; 63
+     100:	cd bf       	out	0x3d, r28	; 61
+     102:	8c 83       	std	Y+4, r24	; 0x04
+     104:	6d 83       	std	Y+5, r22	; 0x05
+	Dio_PortLevelType * Port_Ptr = NULL_PTR;
+     106:	1b 82       	std	Y+3, r1	; 0x03
+     108:	1a 82       	std	Y+2, r1	; 0x02
+	boolean error = FALSE;
+     10a:	19 82       	std	Y+1, r1	; 0x01
+
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+	/* Check if the Driver is initialized before using this function */
+	if (DIO_NOT_INITIALIZED == Dio_Status)
+     10c:	80 91 2a 01 	lds	r24, 0x012A
+     110:	88 23       	and	r24, r24
+     112:	49 f4       	brne	.+18     	; 0x126 <Dio_WriteChannel+0x38>
+	{
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     114:	88 e7       	ldi	r24, 0x78	; 120
+     116:	90 e0       	ldi	r25, 0x00	; 0
+     118:	60 e0       	ldi	r22, 0x00	; 0
+     11a:	41 e0       	ldi	r20, 0x01	; 1
+     11c:	20 ef       	ldi	r18, 0xF0	; 240
+     11e:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_WRITE_CHANNEL_SID, DIO_E_UNINIT);
+		error = TRUE;
+     122:	81 e0       	ldi	r24, 0x01	; 1
+     124:	89 83       	std	Y+1, r24	; 0x01
+	else
+	{
+		/* No Action Required */
+	}
+	/* Check if the used channel is within the valid range */
+	if (DIO_CONFIGURED_CHANNLES <= ChannelId)
+     126:	8c 81       	ldd	r24, Y+4	; 0x04
+     128:	84 30       	cpi	r24, 0x04	; 4
+     12a:	48 f0       	brcs	.+18     	; 0x13e <Dio_WriteChannel+0x50>
+	{
+
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     12c:	88 e7       	ldi	r24, 0x78	; 120
+     12e:	90 e0       	ldi	r25, 0x00	; 0
+     130:	60 e0       	ldi	r22, 0x00	; 0
+     132:	41 e0       	ldi	r20, 0x01	; 1
+     134:	2a e0       	ldi	r18, 0x0A	; 10
+     136:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_WRITE_CHANNEL_SID, DIO_E_PARAM_INVALID_CHANNEL_ID);
+		error = TRUE;
+     13a:	81 e0       	ldi	r24, 0x01	; 1
+     13c:	89 83       	std	Y+1, r24	; 0x01
+		/* No Action Required */
+	}
+#endif
+
+	/* In-case there are no errors */
+	if(FALSE == error)
+     13e:	89 81       	ldd	r24, Y+1	; 0x01
+     140:	88 23       	and	r24, r24
+     142:	09 f0       	breq	.+2      	; 0x146 <Dio_WriteChannel+0x58>
+     144:	84 c0       	rjmp	.+264    	; 0x24e <Dio_WriteChannel+0x160>
+	{
+		/* Point to the correct PORT register according to the Port Id stored in the Port_Num member */
+		switch(Dio_PortChannels[ChannelId].Port_Num)
+     146:	20 91 28 01 	lds	r18, 0x0128
+     14a:	30 91 29 01 	lds	r19, 0x0129
+     14e:	8c 81       	ldd	r24, Y+4	; 0x04
+     150:	88 2f       	mov	r24, r24
+     152:	90 e0       	ldi	r25, 0x00	; 0
+     154:	88 0f       	add	r24, r24
+     156:	99 1f       	adc	r25, r25
+     158:	f9 01       	movw	r30, r18
+     15a:	e8 0f       	add	r30, r24
+     15c:	f9 1f       	adc	r31, r25
+     15e:	80 81       	ld	r24, Z
+     160:	28 2f       	mov	r18, r24
+     162:	30 e0       	ldi	r19, 0x00	; 0
+     164:	3f 83       	std	Y+7, r19	; 0x07
+     166:	2e 83       	std	Y+6, r18	; 0x06
+     168:	8e 81       	ldd	r24, Y+6	; 0x06
+     16a:	9f 81       	ldd	r25, Y+7	; 0x07
+     16c:	81 30       	cpi	r24, 0x01	; 1
+     16e:	91 05       	cpc	r25, r1
+     170:	d1 f0       	breq	.+52     	; 0x1a6 <Dio_WriteChannel+0xb8>
+     172:	2e 81       	ldd	r18, Y+6	; 0x06
+     174:	3f 81       	ldd	r19, Y+7	; 0x07
+     176:	22 30       	cpi	r18, 0x02	; 2
+     178:	31 05       	cpc	r19, r1
+     17a:	2c f4       	brge	.+10     	; 0x186 <Dio_WriteChannel+0x98>
+     17c:	8e 81       	ldd	r24, Y+6	; 0x06
+     17e:	9f 81       	ldd	r25, Y+7	; 0x07
+     180:	00 97       	sbiw	r24, 0x00	; 0
+     182:	61 f0       	breq	.+24     	; 0x19c <Dio_WriteChannel+0xae>
+     184:	1e c0       	rjmp	.+60     	; 0x1c2 <Dio_WriteChannel+0xd4>
+     186:	2e 81       	ldd	r18, Y+6	; 0x06
+     188:	3f 81       	ldd	r19, Y+7	; 0x07
+     18a:	22 30       	cpi	r18, 0x02	; 2
+     18c:	31 05       	cpc	r19, r1
+     18e:	81 f0       	breq	.+32     	; 0x1b0 <Dio_WriteChannel+0xc2>
+     190:	8e 81       	ldd	r24, Y+6	; 0x06
+     192:	9f 81       	ldd	r25, Y+7	; 0x07
+     194:	83 30       	cpi	r24, 0x03	; 3
+     196:	91 05       	cpc	r25, r1
+     198:	81 f0       	breq	.+32     	; 0x1ba <Dio_WriteChannel+0xcc>
+     19a:	13 c0       	rjmp	.+38     	; 0x1c2 <Dio_WriteChannel+0xd4>
+		{
+			case 0:	Port_Ptr = &PORTA_REG;
+     19c:	8b e3       	ldi	r24, 0x3B	; 59
+     19e:	90 e0       	ldi	r25, 0x00	; 0
+     1a0:	9b 83       	std	Y+3, r25	; 0x03
+     1a2:	8a 83       	std	Y+2, r24	; 0x02
+     1a4:	0e c0       	rjmp	.+28     	; 0x1c2 <Dio_WriteChannel+0xd4>
+		        break;
+			case 1:	Port_Ptr = &PORTB_REG;
+     1a6:	88 e3       	ldi	r24, 0x38	; 56
+     1a8:	90 e0       	ldi	r25, 0x00	; 0
+     1aa:	9b 83       	std	Y+3, r25	; 0x03
+     1ac:	8a 83       	std	Y+2, r24	; 0x02
+     1ae:	09 c0       	rjmp	.+18     	; 0x1c2 <Dio_WriteChannel+0xd4>
+		        break;
+			case 2:	Port_Ptr = &PORTC_REG;
+     1b0:	85 e3       	ldi	r24, 0x35	; 53
+     1b2:	90 e0       	ldi	r25, 0x00	; 0
+     1b4:	9b 83       	std	Y+3, r25	; 0x03
+     1b6:	8a 83       	std	Y+2, r24	; 0x02
+     1b8:	04 c0       	rjmp	.+8      	; 0x1c2 <Dio_WriteChannel+0xd4>
+		        break;
+			case 3:	Port_Ptr = &PORTD_REG;
+     1ba:	82 e3       	ldi	r24, 0x32	; 50
+     1bc:	90 e0       	ldi	r25, 0x00	; 0
+     1be:	9b 83       	std	Y+3, r25	; 0x03
+     1c0:	8a 83       	std	Y+2, r24	; 0x02
+		        break;
+		}
+		if(Level == STD_HIGH)
+     1c2:	8d 81       	ldd	r24, Y+5	; 0x05
+     1c4:	81 30       	cpi	r24, 0x01	; 1
+     1c6:	01 f5       	brne	.+64     	; 0x208 <Dio_WriteChannel+0x11a>
+		{
+			/* Write Logic High */
+			SET_BIT(*Port_Ptr,Dio_PortChannels[ChannelId].Ch_Num);
+     1c8:	ea 81       	ldd	r30, Y+2	; 0x02
+     1ca:	fb 81       	ldd	r31, Y+3	; 0x03
+     1cc:	80 81       	ld	r24, Z
+     1ce:	48 2f       	mov	r20, r24
+     1d0:	20 91 28 01 	lds	r18, 0x0128
+     1d4:	30 91 29 01 	lds	r19, 0x0129
+     1d8:	8c 81       	ldd	r24, Y+4	; 0x04
+     1da:	88 2f       	mov	r24, r24
+     1dc:	90 e0       	ldi	r25, 0x00	; 0
+     1de:	88 0f       	add	r24, r24
+     1e0:	99 1f       	adc	r25, r25
+     1e2:	f9 01       	movw	r30, r18
+     1e4:	e8 0f       	add	r30, r24
+     1e6:	f9 1f       	adc	r31, r25
+     1e8:	81 81       	ldd	r24, Z+1	; 0x01
+     1ea:	28 2f       	mov	r18, r24
+     1ec:	30 e0       	ldi	r19, 0x00	; 0
+     1ee:	81 e0       	ldi	r24, 0x01	; 1
+     1f0:	90 e0       	ldi	r25, 0x00	; 0
+     1f2:	02 2e       	mov	r0, r18
+     1f4:	02 c0       	rjmp	.+4      	; 0x1fa <Dio_WriteChannel+0x10c>
+     1f6:	88 0f       	add	r24, r24
+     1f8:	99 1f       	adc	r25, r25
+     1fa:	0a 94       	dec	r0
+     1fc:	e2 f7       	brpl	.-8      	; 0x1f6 <Dio_WriteChannel+0x108>
+     1fe:	84 2b       	or	r24, r20
+     200:	ea 81       	ldd	r30, Y+2	; 0x02
+     202:	fb 81       	ldd	r31, Y+3	; 0x03
+     204:	80 83       	st	Z, r24
+     206:	23 c0       	rjmp	.+70     	; 0x24e <Dio_WriteChannel+0x160>
+		}
+		else if(Level == STD_LOW)
+     208:	8d 81       	ldd	r24, Y+5	; 0x05
+     20a:	88 23       	and	r24, r24
+     20c:	01 f5       	brne	.+64     	; 0x24e <Dio_WriteChannel+0x160>
+		{
+			/* Write Logic Low */
+			CLEAR_BIT(*Port_Ptr,Dio_PortChannels[ChannelId].Ch_Num);
+     20e:	ea 81       	ldd	r30, Y+2	; 0x02
+     210:	fb 81       	ldd	r31, Y+3	; 0x03
+     212:	80 81       	ld	r24, Z
+     214:	48 2f       	mov	r20, r24
+     216:	20 91 28 01 	lds	r18, 0x0128
+     21a:	30 91 29 01 	lds	r19, 0x0129
+     21e:	8c 81       	ldd	r24, Y+4	; 0x04
+     220:	88 2f       	mov	r24, r24
+     222:	90 e0       	ldi	r25, 0x00	; 0
+     224:	88 0f       	add	r24, r24
+     226:	99 1f       	adc	r25, r25
+     228:	f9 01       	movw	r30, r18
+     22a:	e8 0f       	add	r30, r24
+     22c:	f9 1f       	adc	r31, r25
+     22e:	81 81       	ldd	r24, Z+1	; 0x01
+     230:	28 2f       	mov	r18, r24
+     232:	30 e0       	ldi	r19, 0x00	; 0
+     234:	81 e0       	ldi	r24, 0x01	; 1
+     236:	90 e0       	ldi	r25, 0x00	; 0
+     238:	02 2e       	mov	r0, r18
+     23a:	02 c0       	rjmp	.+4      	; 0x240 <Dio_WriteChannel+0x152>
+     23c:	88 0f       	add	r24, r24
+     23e:	99 1f       	adc	r25, r25
+     240:	0a 94       	dec	r0
+     242:	e2 f7       	brpl	.-8      	; 0x23c <Dio_WriteChannel+0x14e>
+     244:	80 95       	com	r24
+     246:	84 23       	and	r24, r20
+     248:	ea 81       	ldd	r30, Y+2	; 0x02
+     24a:	fb 81       	ldd	r31, Y+3	; 0x03
+     24c:	80 83       	st	Z, r24
+	else
+	{
+		/* No Action Required */
+	}
+
+}
+     24e:	27 96       	adiw	r28, 0x07	; 7
+     250:	0f b6       	in	r0, 0x3f	; 63
+     252:	f8 94       	cli
+     254:	de bf       	out	0x3e, r29	; 62
+     256:	0f be       	out	0x3f, r0	; 63
+     258:	cd bf       	out	0x3d, r28	; 61
+     25a:	cf 91       	pop	r28
+     25c:	df 91       	pop	r29
+     25e:	08 95       	ret
+
+00000260 <Dio_ReadChannel>:
+* Parameters (out): None
+* Return value: Dio_LevelType
+* Description: Function to return the value of the specified DIO channel.
+************************************************************************************/
+Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
+{
+     260:	df 93       	push	r29
+     262:	cf 93       	push	r28
+     264:	cd b7       	in	r28, 0x3d	; 61
+     266:	de b7       	in	r29, 0x3e	; 62
+     268:	28 97       	sbiw	r28, 0x08	; 8
+     26a:	0f b6       	in	r0, 0x3f	; 63
+     26c:	f8 94       	cli
+     26e:	de bf       	out	0x3e, r29	; 62
+     270:	0f be       	out	0x3f, r0	; 63
+     272:	cd bf       	out	0x3d, r28	; 61
+     274:	8d 83       	std	Y+5, r24	; 0x05
+	Dio_PortLevelType * PIN_Ptr = NULL_PTR;
+     276:	1c 82       	std	Y+4, r1	; 0x04
+     278:	1b 82       	std	Y+3, r1	; 0x03
+	Dio_LevelType output = STD_LOW;
+     27a:	1a 82       	std	Y+2, r1	; 0x02
+	boolean error = FALSE;
+     27c:	19 82       	std	Y+1, r1	; 0x01
+
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+	/* Check if the Driver is initialized before using this function */
+	if (DIO_NOT_INITIALIZED == Dio_Status)
+     27e:	80 91 2a 01 	lds	r24, 0x012A
+     282:	88 23       	and	r24, r24
+     284:	49 f4       	brne	.+18     	; 0x298 <Dio_ReadChannel+0x38>
+	{
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     286:	88 e7       	ldi	r24, 0x78	; 120
+     288:	90 e0       	ldi	r25, 0x00	; 0
+     28a:	60 e0       	ldi	r22, 0x00	; 0
+     28c:	40 e0       	ldi	r20, 0x00	; 0
+     28e:	20 ef       	ldi	r18, 0xF0	; 240
+     290:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_READ_CHANNEL_SID, DIO_E_UNINIT);
+		error = TRUE;
+     294:	81 e0       	ldi	r24, 0x01	; 1
+     296:	89 83       	std	Y+1, r24	; 0x01
+	else
+	{
+		/* No Action Required */
+	}
+	/* Check if the used channel is within the valid range */
+	if (DIO_CONFIGURED_CHANNLES <= ChannelId)
+     298:	8d 81       	ldd	r24, Y+5	; 0x05
+     29a:	84 30       	cpi	r24, 0x04	; 4
+     29c:	48 f0       	brcs	.+18     	; 0x2b0 <Dio_ReadChannel+0x50>
+	{
+
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     29e:	88 e7       	ldi	r24, 0x78	; 120
+     2a0:	90 e0       	ldi	r25, 0x00	; 0
+     2a2:	60 e0       	ldi	r22, 0x00	; 0
+     2a4:	40 e0       	ldi	r20, 0x00	; 0
+     2a6:	2a e0       	ldi	r18, 0x0A	; 10
+     2a8:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_READ_CHANNEL_SID, DIO_E_PARAM_INVALID_CHANNEL_ID);
+		error = TRUE;
+     2ac:	81 e0       	ldi	r24, 0x01	; 1
+     2ae:	89 83       	std	Y+1, r24	; 0x01
+		/* No Action Required */
+	}
+#endif
+
+	/* In-case there are no errors */
+	if(FALSE == error)
+     2b0:	89 81       	ldd	r24, Y+1	; 0x01
+     2b2:	88 23       	and	r24, r24
+     2b4:	09 f0       	breq	.+2      	; 0x2b8 <Dio_ReadChannel+0x58>
+     2b6:	65 c0       	rjmp	.+202    	; 0x382 <Dio_ReadChannel+0x122>
+	{
+		/* Point to the correct PIN register according to the Port Id stored in the Port_Num member */
+		switch(Dio_PortChannels[ChannelId].Port_Num)
+     2b8:	20 91 28 01 	lds	r18, 0x0128
+     2bc:	30 91 29 01 	lds	r19, 0x0129
+     2c0:	8d 81       	ldd	r24, Y+5	; 0x05
+     2c2:	88 2f       	mov	r24, r24
+     2c4:	90 e0       	ldi	r25, 0x00	; 0
+     2c6:	88 0f       	add	r24, r24
+     2c8:	99 1f       	adc	r25, r25
+     2ca:	f9 01       	movw	r30, r18
+     2cc:	e8 0f       	add	r30, r24
+     2ce:	f9 1f       	adc	r31, r25
+     2d0:	80 81       	ld	r24, Z
+     2d2:	28 2f       	mov	r18, r24
+     2d4:	30 e0       	ldi	r19, 0x00	; 0
+     2d6:	3f 83       	std	Y+7, r19	; 0x07
+     2d8:	2e 83       	std	Y+6, r18	; 0x06
+     2da:	8e 81       	ldd	r24, Y+6	; 0x06
+     2dc:	9f 81       	ldd	r25, Y+7	; 0x07
+     2de:	81 30       	cpi	r24, 0x01	; 1
+     2e0:	91 05       	cpc	r25, r1
+     2e2:	d1 f0       	breq	.+52     	; 0x318 <Dio_ReadChannel+0xb8>
+     2e4:	2e 81       	ldd	r18, Y+6	; 0x06
+     2e6:	3f 81       	ldd	r19, Y+7	; 0x07
+     2e8:	22 30       	cpi	r18, 0x02	; 2
+     2ea:	31 05       	cpc	r19, r1
+     2ec:	2c f4       	brge	.+10     	; 0x2f8 <Dio_ReadChannel+0x98>
+     2ee:	8e 81       	ldd	r24, Y+6	; 0x06
+     2f0:	9f 81       	ldd	r25, Y+7	; 0x07
+     2f2:	00 97       	sbiw	r24, 0x00	; 0
+     2f4:	61 f0       	breq	.+24     	; 0x30e <Dio_ReadChannel+0xae>
+     2f6:	1e c0       	rjmp	.+60     	; 0x334 <Dio_ReadChannel+0xd4>
+     2f8:	2e 81       	ldd	r18, Y+6	; 0x06
+     2fa:	3f 81       	ldd	r19, Y+7	; 0x07
+     2fc:	22 30       	cpi	r18, 0x02	; 2
+     2fe:	31 05       	cpc	r19, r1
+     300:	81 f0       	breq	.+32     	; 0x322 <Dio_ReadChannel+0xc2>
+     302:	8e 81       	ldd	r24, Y+6	; 0x06
+     304:	9f 81       	ldd	r25, Y+7	; 0x07
+     306:	83 30       	cpi	r24, 0x03	; 3
+     308:	91 05       	cpc	r25, r1
+     30a:	81 f0       	breq	.+32     	; 0x32c <Dio_ReadChannel+0xcc>
+     30c:	13 c0       	rjmp	.+38     	; 0x334 <Dio_ReadChannel+0xd4>
+		{
+		case 0:	PIN_Ptr = &PINA_REG;
+     30e:	89 e3       	ldi	r24, 0x39	; 57
+     310:	90 e0       	ldi	r25, 0x00	; 0
+     312:	9c 83       	std	Y+4, r25	; 0x04
+     314:	8b 83       	std	Y+3, r24	; 0x03
+     316:	0e c0       	rjmp	.+28     	; 0x334 <Dio_ReadChannel+0xd4>
+		break;
+		case 1:	PIN_Ptr = &PINB_REG;
+     318:	86 e3       	ldi	r24, 0x36	; 54
+     31a:	90 e0       	ldi	r25, 0x00	; 0
+     31c:	9c 83       	std	Y+4, r25	; 0x04
+     31e:	8b 83       	std	Y+3, r24	; 0x03
+     320:	09 c0       	rjmp	.+18     	; 0x334 <Dio_ReadChannel+0xd4>
+		break;
+		case 2:	PIN_Ptr = &PINC_REG;
+     322:	83 e3       	ldi	r24, 0x33	; 51
+     324:	90 e0       	ldi	r25, 0x00	; 0
+     326:	9c 83       	std	Y+4, r25	; 0x04
+     328:	8b 83       	std	Y+3, r24	; 0x03
+     32a:	04 c0       	rjmp	.+8      	; 0x334 <Dio_ReadChannel+0xd4>
+		break;
+		case 3:	PIN_Ptr = &PIND_REG;
+     32c:	80 e3       	ldi	r24, 0x30	; 48
+     32e:	90 e0       	ldi	r25, 0x00	; 0
+     330:	9c 83       	std	Y+4, r25	; 0x04
+     332:	8b 83       	std	Y+3, r24	; 0x03
+		break;
+		}
+		/* Read the required channel */
+		if(BIT_IS_SET(*PIN_Ptr,Dio_PortChannels[ChannelId].Ch_Num))
+     334:	eb 81       	ldd	r30, Y+3	; 0x03
+     336:	fc 81       	ldd	r31, Y+4	; 0x04
+     338:	80 81       	ld	r24, Z
+     33a:	48 2f       	mov	r20, r24
+     33c:	50 e0       	ldi	r21, 0x00	; 0
+     33e:	20 91 28 01 	lds	r18, 0x0128
+     342:	30 91 29 01 	lds	r19, 0x0129
+     346:	8d 81       	ldd	r24, Y+5	; 0x05
+     348:	88 2f       	mov	r24, r24
+     34a:	90 e0       	ldi	r25, 0x00	; 0
+     34c:	88 0f       	add	r24, r24
+     34e:	99 1f       	adc	r25, r25
+     350:	f9 01       	movw	r30, r18
+     352:	e8 0f       	add	r30, r24
+     354:	f9 1f       	adc	r31, r25
+     356:	81 81       	ldd	r24, Z+1	; 0x01
+     358:	88 2f       	mov	r24, r24
+     35a:	90 e0       	ldi	r25, 0x00	; 0
+     35c:	9a 01       	movw	r18, r20
+     35e:	02 c0       	rjmp	.+4      	; 0x364 <Dio_ReadChannel+0x104>
+     360:	35 95       	asr	r19
+     362:	27 95       	ror	r18
+     364:	8a 95       	dec	r24
+     366:	e2 f7       	brpl	.-8      	; 0x360 <Dio_ReadChannel+0x100>
+     368:	c9 01       	movw	r24, r18
+     36a:	81 70       	andi	r24, 0x01	; 1
+     36c:	90 70       	andi	r25, 0x00	; 0
+     36e:	88 23       	and	r24, r24
+     370:	19 f0       	breq	.+6      	; 0x378 <Dio_ReadChannel+0x118>
+		{
+			output = STD_HIGH;
+     372:	81 e0       	ldi	r24, 0x01	; 1
+     374:	8a 83       	std	Y+2, r24	; 0x02
+     376:	01 c0       	rjmp	.+2      	; 0x37a <Dio_ReadChannel+0x11a>
+		}
+		else
+		{
+			output = STD_LOW;
+     378:	1a 82       	std	Y+2, r1	; 0x02
+		}
+		return output;
+     37a:	8a 81       	ldd	r24, Y+2	; 0x02
+     37c:	88 87       	std	Y+8, r24	; 0x08
+	}
+	else
+	{
+		/* No Action Required */
+	}
+}
+     37e:	88 85       	ldd	r24, Y+8	; 0x08
+     380:	00 c0       	rjmp	.+0      	; 0x382 <Dio_ReadChannel+0x122>
+     382:	28 96       	adiw	r28, 0x08	; 8
+     384:	0f b6       	in	r0, 0x3f	; 63
+     386:	f8 94       	cli
+     388:	de bf       	out	0x3e, r29	; 62
+     38a:	0f be       	out	0x3f, r0	; 63
+     38c:	cd bf       	out	0x3d, r28	; 61
+     38e:	cf 91       	pop	r28
+     390:	df 91       	pop	r29
+     392:	08 95       	ret
+
+00000394 <Dio_GetVersionInfo>:
+* Return value: None
+* Description: Function to get the version information of this module.
+************************************************************************************/
+#if (DIO_VERSION_INFO_API == STD_ON)
+void Dio_GetVersionInfo(Std_VersionInfoType *versioninfo)
+{
+     394:	df 93       	push	r29
+     396:	cf 93       	push	r28
+     398:	00 d0       	rcall	.+0      	; 0x39a <Dio_GetVersionInfo+0x6>
+     39a:	cd b7       	in	r28, 0x3d	; 61
+     39c:	de b7       	in	r29, 0x3e	; 62
+     39e:	9a 83       	std	Y+2, r25	; 0x02
+     3a0:	89 83       	std	Y+1, r24	; 0x01
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+	/* Check if input pointer is not Null pointer */
+	if(NULL_PTR == versioninfo)
+     3a2:	89 81       	ldd	r24, Y+1	; 0x01
+     3a4:	9a 81       	ldd	r25, Y+2	; 0x02
+     3a6:	00 97       	sbiw	r24, 0x00	; 0
+     3a8:	41 f4       	brne	.+16     	; 0x3ba <Dio_GetVersionInfo+0x26>
+	{
+		/* Report to DET  */
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     3aa:	88 e7       	ldi	r24, 0x78	; 120
+     3ac:	90 e0       	ldi	r25, 0x00	; 0
+     3ae:	60 e0       	ldi	r22, 0x00	; 0
+     3b0:	42 e1       	ldi	r20, 0x12	; 18
+     3b2:	20 e2       	ldi	r18, 0x20	; 32
+     3b4:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     3b8:	16 c0       	rjmp	.+44     	; 0x3e6 <Dio_GetVersionInfo+0x52>
+	}
+	else
+#endif /* (DIO_DEV_ERROR_DETECT == STD_ON) */
+	{
+		/* Copy the vendor Id */
+		versioninfo->vendorID = (uint16)DIO_VENDOR_ID;
+     3ba:	e9 81       	ldd	r30, Y+1	; 0x01
+     3bc:	fa 81       	ldd	r31, Y+2	; 0x02
+     3be:	88 ee       	ldi	r24, 0xE8	; 232
+     3c0:	93 e0       	ldi	r25, 0x03	; 3
+     3c2:	91 83       	std	Z+1, r25	; 0x01
+     3c4:	80 83       	st	Z, r24
+		/* Copy the module Id */
+		versioninfo->moduleID = (uint16)DIO_MODULE_ID;
+     3c6:	e9 81       	ldd	r30, Y+1	; 0x01
+     3c8:	fa 81       	ldd	r31, Y+2	; 0x02
+     3ca:	88 e7       	ldi	r24, 0x78	; 120
+     3cc:	90 e0       	ldi	r25, 0x00	; 0
+     3ce:	93 83       	std	Z+3, r25	; 0x03
+     3d0:	82 83       	std	Z+2, r24	; 0x02
+		/* Copy Software Major Version */
+		versioninfo->sw_major_version = (uint8)DIO_SW_MAJOR_VERSION;
+     3d2:	e9 81       	ldd	r30, Y+1	; 0x01
+     3d4:	fa 81       	ldd	r31, Y+2	; 0x02
+     3d6:	81 e0       	ldi	r24, 0x01	; 1
+     3d8:	84 83       	std	Z+4, r24	; 0x04
+		/* Copy Software Minor Version */
+		versioninfo->sw_minor_version = (uint8)DIO_SW_MINOR_VERSION;
+     3da:	e9 81       	ldd	r30, Y+1	; 0x01
+     3dc:	fa 81       	ldd	r31, Y+2	; 0x02
+     3de:	15 82       	std	Z+5, r1	; 0x05
+		/* Copy Software Patch Version */
+		versioninfo->sw_patch_version = (uint8)DIO_SW_PATCH_VERSION;
+     3e0:	e9 81       	ldd	r30, Y+1	; 0x01
+     3e2:	fa 81       	ldd	r31, Y+2	; 0x02
+     3e4:	16 82       	std	Z+6, r1	; 0x06
+	}
+}
+     3e6:	0f 90       	pop	r0
+     3e8:	0f 90       	pop	r0
+     3ea:	cf 91       	pop	r28
+     3ec:	df 91       	pop	r29
+     3ee:	08 95       	ret
+
+000003f0 <Dio_FlipChannel>:
+* Return value: Dio_LevelType
+* Description: Function to flip the level of a channel and return the level of the channel after flip.
+************************************************************************************/
+#if (DIO_FLIP_CHANNEL_API == STD_ON)
+Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
+{
+     3f0:	df 93       	push	r29
+     3f2:	cf 93       	push	r28
+     3f4:	cd b7       	in	r28, 0x3d	; 61
+     3f6:	de b7       	in	r29, 0x3e	; 62
+     3f8:	2a 97       	sbiw	r28, 0x0a	; 10
+     3fa:	0f b6       	in	r0, 0x3f	; 63
+     3fc:	f8 94       	cli
+     3fe:	de bf       	out	0x3e, r29	; 62
+     400:	0f be       	out	0x3f, r0	; 63
+     402:	cd bf       	out	0x3d, r28	; 61
+     404:	8f 83       	std	Y+7, r24	; 0x07
+	Dio_PortLevelType * Port_Ptr = NULL_PTR;
+     406:	1e 82       	std	Y+6, r1	; 0x06
+     408:	1d 82       	std	Y+5, r1	; 0x05
+	Dio_PortLevelType * PIN_Ptr = NULL_PTR;
+     40a:	1c 82       	std	Y+4, r1	; 0x04
+     40c:	1b 82       	std	Y+3, r1	; 0x03
+	Dio_LevelType output = STD_LOW;
+     40e:	1a 82       	std	Y+2, r1	; 0x02
+	boolean error = FALSE;
+     410:	19 82       	std	Y+1, r1	; 0x01
+
+#if (DIO_DEV_ERROR_DETECT == STD_ON)
+	/* Check if the Driver is initialized before using this function */
+	if (DIO_NOT_INITIALIZED == Dio_Status)
+     412:	80 91 2a 01 	lds	r24, 0x012A
+     416:	88 23       	and	r24, r24
+     418:	49 f4       	brne	.+18     	; 0x42c <Dio_FlipChannel+0x3c>
+	{
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     41a:	88 e7       	ldi	r24, 0x78	; 120
+     41c:	90 e0       	ldi	r25, 0x00	; 0
+     41e:	60 e0       	ldi	r22, 0x00	; 0
+     420:	41 e1       	ldi	r20, 0x11	; 17
+     422:	20 ef       	ldi	r18, 0xF0	; 240
+     424:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_FLIP_CHANNEL_SID, DIO_E_UNINIT);
+		error = TRUE;
+     428:	81 e0       	ldi	r24, 0x01	; 1
+     42a:	89 83       	std	Y+1, r24	; 0x01
+	else
+	{
+		/* No Action Required */
+	}
+	/* Check if the used channel is within the valid range */
+	if (DIO_CONFIGURED_CHANNLES <= ChannelId)
+     42c:	8f 81       	ldd	r24, Y+7	; 0x07
+     42e:	84 30       	cpi	r24, 0x04	; 4
+     430:	48 f0       	brcs	.+18     	; 0x444 <Dio_FlipChannel+0x54>
+	{
+
+		Det_ReportError(DIO_MODULE_ID, DIO_INSTANCE_ID,
+     432:	88 e7       	ldi	r24, 0x78	; 120
+     434:	90 e0       	ldi	r25, 0x00	; 0
+     436:	60 e0       	ldi	r22, 0x00	; 0
+     438:	41 e1       	ldi	r20, 0x11	; 17
+     43a:	2a e0       	ldi	r18, 0x0A	; 10
+     43c:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+				DIO_FLIP_CHANNEL_SID, DIO_E_PARAM_INVALID_CHANNEL_ID);
+		error = TRUE;
+     440:	81 e0       	ldi	r24, 0x01	; 1
+     442:	89 83       	std	Y+1, r24	; 0x01
+		/* No Action Required */
+	}
+#endif
+
+	/* In-case there are no errors */
+	if(FALSE == error)
+     444:	89 81       	ldd	r24, Y+1	; 0x01
+     446:	88 23       	and	r24, r24
+     448:	09 f0       	breq	.+2      	; 0x44c <Dio_FlipChannel+0x5c>
+     44a:	b4 c0       	rjmp	.+360    	; 0x5b4 <__stack+0x155>
+	{
+		/* Point to the correct PIN & PORT register according to the Port Id stored in the Port_Num member */
+		switch(Dio_PortChannels[ChannelId].Port_Num)
+     44c:	20 91 28 01 	lds	r18, 0x0128
+     450:	30 91 29 01 	lds	r19, 0x0129
+     454:	8f 81       	ldd	r24, Y+7	; 0x07
+     456:	88 2f       	mov	r24, r24
+     458:	90 e0       	ldi	r25, 0x00	; 0
+     45a:	88 0f       	add	r24, r24
+     45c:	99 1f       	adc	r25, r25
+     45e:	f9 01       	movw	r30, r18
+     460:	e8 0f       	add	r30, r24
+     462:	f9 1f       	adc	r31, r25
+     464:	80 81       	ld	r24, Z
+     466:	28 2f       	mov	r18, r24
+     468:	30 e0       	ldi	r19, 0x00	; 0
+     46a:	39 87       	std	Y+9, r19	; 0x09
+     46c:	28 87       	std	Y+8, r18	; 0x08
+     46e:	88 85       	ldd	r24, Y+8	; 0x08
+     470:	99 85       	ldd	r25, Y+9	; 0x09
+     472:	81 30       	cpi	r24, 0x01	; 1
+     474:	91 05       	cpc	r25, r1
+     476:	f1 f0       	breq	.+60     	; 0x4b4 <__stack+0x55>
+     478:	28 85       	ldd	r18, Y+8	; 0x08
+     47a:	39 85       	ldd	r19, Y+9	; 0x09
+     47c:	22 30       	cpi	r18, 0x02	; 2
+     47e:	31 05       	cpc	r19, r1
+     480:	2c f4       	brge	.+10     	; 0x48c <__stack+0x2d>
+     482:	88 85       	ldd	r24, Y+8	; 0x08
+     484:	99 85       	ldd	r25, Y+9	; 0x09
+     486:	00 97       	sbiw	r24, 0x00	; 0
+     488:	61 f0       	breq	.+24     	; 0x4a2 <__stack+0x43>
+     48a:	2e c0       	rjmp	.+92     	; 0x4e8 <__stack+0x89>
+     48c:	28 85       	ldd	r18, Y+8	; 0x08
+     48e:	39 85       	ldd	r19, Y+9	; 0x09
+     490:	22 30       	cpi	r18, 0x02	; 2
+     492:	31 05       	cpc	r19, r1
+     494:	c1 f0       	breq	.+48     	; 0x4c6 <__stack+0x67>
+     496:	88 85       	ldd	r24, Y+8	; 0x08
+     498:	99 85       	ldd	r25, Y+9	; 0x09
+     49a:	83 30       	cpi	r24, 0x03	; 3
+     49c:	91 05       	cpc	r25, r1
+     49e:	e1 f0       	breq	.+56     	; 0x4d8 <__stack+0x79>
+     4a0:	23 c0       	rjmp	.+70     	; 0x4e8 <__stack+0x89>
+		{
+		case 0:	Port_Ptr = &PORTA_REG;
+     4a2:	8b e3       	ldi	r24, 0x3B	; 59
+     4a4:	90 e0       	ldi	r25, 0x00	; 0
+     4a6:	9e 83       	std	Y+6, r25	; 0x06
+     4a8:	8d 83       	std	Y+5, r24	; 0x05
+		        PIN_Ptr  = &PINA_REG;
+     4aa:	89 e3       	ldi	r24, 0x39	; 57
+     4ac:	90 e0       	ldi	r25, 0x00	; 0
+     4ae:	9c 83       	std	Y+4, r25	; 0x04
+     4b0:	8b 83       	std	Y+3, r24	; 0x03
+     4b2:	1a c0       	rjmp	.+52     	; 0x4e8 <__stack+0x89>
+		break;
+		case 1:	Port_Ptr = &PORTB_REG;
+     4b4:	88 e3       	ldi	r24, 0x38	; 56
+     4b6:	90 e0       	ldi	r25, 0x00	; 0
+     4b8:	9e 83       	std	Y+6, r25	; 0x06
+     4ba:	8d 83       	std	Y+5, r24	; 0x05
+		        PIN_Ptr  = &PINB_REG;
+     4bc:	86 e3       	ldi	r24, 0x36	; 54
+     4be:	90 e0       	ldi	r25, 0x00	; 0
+     4c0:	9c 83       	std	Y+4, r25	; 0x04
+     4c2:	8b 83       	std	Y+3, r24	; 0x03
+     4c4:	11 c0       	rjmp	.+34     	; 0x4e8 <__stack+0x89>
+		break;
+		case 2:	Port_Ptr = &PORTC_REG;
+     4c6:	85 e3       	ldi	r24, 0x35	; 53
+     4c8:	90 e0       	ldi	r25, 0x00	; 0
+     4ca:	9e 83       	std	Y+6, r25	; 0x06
+     4cc:	8d 83       	std	Y+5, r24	; 0x05
+		        PIN_Ptr  = &PINC_REG;
+     4ce:	83 e3       	ldi	r24, 0x33	; 51
+     4d0:	90 e0       	ldi	r25, 0x00	; 0
+     4d2:	9c 83       	std	Y+4, r25	; 0x04
+     4d4:	8b 83       	std	Y+3, r24	; 0x03
+     4d6:	08 c0       	rjmp	.+16     	; 0x4e8 <__stack+0x89>
+		break;
+		case 3:	Port_Ptr = &PORTD_REG;
+     4d8:	82 e3       	ldi	r24, 0x32	; 50
+     4da:	90 e0       	ldi	r25, 0x00	; 0
+     4dc:	9e 83       	std	Y+6, r25	; 0x06
+     4de:	8d 83       	std	Y+5, r24	; 0x05
+		        PIN_Ptr  = &PIND_REG;
+     4e0:	80 e3       	ldi	r24, 0x30	; 48
+     4e2:	90 e0       	ldi	r25, 0x00	; 0
+     4e4:	9c 83       	std	Y+4, r25	; 0x04
+     4e6:	8b 83       	std	Y+3, r24	; 0x03
+		break;
+		}
+		/* Read the required channel and write the required level */
+		if(BIT_IS_SET(*PIN_Ptr,Dio_PortChannels[ChannelId].Ch_Num))
+     4e8:	eb 81       	ldd	r30, Y+3	; 0x03
+     4ea:	fc 81       	ldd	r31, Y+4	; 0x04
+     4ec:	80 81       	ld	r24, Z
+     4ee:	48 2f       	mov	r20, r24
+     4f0:	50 e0       	ldi	r21, 0x00	; 0
+     4f2:	20 91 28 01 	lds	r18, 0x0128
+     4f6:	30 91 29 01 	lds	r19, 0x0129
+     4fa:	8f 81       	ldd	r24, Y+7	; 0x07
+     4fc:	88 2f       	mov	r24, r24
+     4fe:	90 e0       	ldi	r25, 0x00	; 0
+     500:	88 0f       	add	r24, r24
+     502:	99 1f       	adc	r25, r25
+     504:	f9 01       	movw	r30, r18
+     506:	e8 0f       	add	r30, r24
+     508:	f9 1f       	adc	r31, r25
+     50a:	81 81       	ldd	r24, Z+1	; 0x01
+     50c:	88 2f       	mov	r24, r24
+     50e:	90 e0       	ldi	r25, 0x00	; 0
+     510:	9a 01       	movw	r18, r20
+     512:	02 c0       	rjmp	.+4      	; 0x518 <__stack+0xb9>
+     514:	35 95       	asr	r19
+     516:	27 95       	ror	r18
+     518:	8a 95       	dec	r24
+     51a:	e2 f7       	brpl	.-8      	; 0x514 <__stack+0xb5>
+     51c:	c9 01       	movw	r24, r18
+     51e:	81 70       	andi	r24, 0x01	; 1
+     520:	90 70       	andi	r25, 0x00	; 0
+     522:	88 23       	and	r24, r24
+     524:	11 f1       	breq	.+68     	; 0x56a <__stack+0x10b>
+		{
+			CLEAR_BIT(*Port_Ptr,Dio_PortChannels[ChannelId].Ch_Num);
+     526:	ed 81       	ldd	r30, Y+5	; 0x05
+     528:	fe 81       	ldd	r31, Y+6	; 0x06
+     52a:	80 81       	ld	r24, Z
+     52c:	48 2f       	mov	r20, r24
+     52e:	20 91 28 01 	lds	r18, 0x0128
+     532:	30 91 29 01 	lds	r19, 0x0129
+     536:	8f 81       	ldd	r24, Y+7	; 0x07
+     538:	88 2f       	mov	r24, r24
+     53a:	90 e0       	ldi	r25, 0x00	; 0
+     53c:	88 0f       	add	r24, r24
+     53e:	99 1f       	adc	r25, r25
+     540:	f9 01       	movw	r30, r18
+     542:	e8 0f       	add	r30, r24
+     544:	f9 1f       	adc	r31, r25
+     546:	81 81       	ldd	r24, Z+1	; 0x01
+     548:	28 2f       	mov	r18, r24
+     54a:	30 e0       	ldi	r19, 0x00	; 0
+     54c:	81 e0       	ldi	r24, 0x01	; 1
+     54e:	90 e0       	ldi	r25, 0x00	; 0
+     550:	02 2e       	mov	r0, r18
+     552:	02 c0       	rjmp	.+4      	; 0x558 <__stack+0xf9>
+     554:	88 0f       	add	r24, r24
+     556:	99 1f       	adc	r25, r25
+     558:	0a 94       	dec	r0
+     55a:	e2 f7       	brpl	.-8      	; 0x554 <__stack+0xf5>
+     55c:	80 95       	com	r24
+     55e:	84 23       	and	r24, r20
+     560:	ed 81       	ldd	r30, Y+5	; 0x05
+     562:	fe 81       	ldd	r31, Y+6	; 0x06
+     564:	80 83       	st	Z, r24
+			output = STD_LOW;
+     566:	1a 82       	std	Y+2, r1	; 0x02
+     568:	21 c0       	rjmp	.+66     	; 0x5ac <__stack+0x14d>
+		}
+		else
+		{
+			SET_BIT(*Port_Ptr,Dio_PortChannels[ChannelId].Ch_Num);
+     56a:	ed 81       	ldd	r30, Y+5	; 0x05
+     56c:	fe 81       	ldd	r31, Y+6	; 0x06
+     56e:	80 81       	ld	r24, Z
+     570:	48 2f       	mov	r20, r24
+     572:	20 91 28 01 	lds	r18, 0x0128
+     576:	30 91 29 01 	lds	r19, 0x0129
+     57a:	8f 81       	ldd	r24, Y+7	; 0x07
+     57c:	88 2f       	mov	r24, r24
+     57e:	90 e0       	ldi	r25, 0x00	; 0
+     580:	88 0f       	add	r24, r24
+     582:	99 1f       	adc	r25, r25
+     584:	f9 01       	movw	r30, r18
+     586:	e8 0f       	add	r30, r24
+     588:	f9 1f       	adc	r31, r25
+     58a:	81 81       	ldd	r24, Z+1	; 0x01
+     58c:	28 2f       	mov	r18, r24
+     58e:	30 e0       	ldi	r19, 0x00	; 0
+     590:	81 e0       	ldi	r24, 0x01	; 1
+     592:	90 e0       	ldi	r25, 0x00	; 0
+     594:	02 2e       	mov	r0, r18
+     596:	02 c0       	rjmp	.+4      	; 0x59c <__stack+0x13d>
+     598:	88 0f       	add	r24, r24
+     59a:	99 1f       	adc	r25, r25
+     59c:	0a 94       	dec	r0
+     59e:	e2 f7       	brpl	.-8      	; 0x598 <__stack+0x139>
+     5a0:	84 2b       	or	r24, r20
+     5a2:	ed 81       	ldd	r30, Y+5	; 0x05
+     5a4:	fe 81       	ldd	r31, Y+6	; 0x06
+     5a6:	80 83       	st	Z, r24
+			output = STD_HIGH;
+     5a8:	81 e0       	ldi	r24, 0x01	; 1
+     5aa:	8a 83       	std	Y+2, r24	; 0x02
+		}
+		return output;
+     5ac:	8a 81       	ldd	r24, Y+2	; 0x02
+     5ae:	8a 87       	std	Y+10, r24	; 0x0a
+	}
+	else
+	{
+		/* No Action Required */
+	}
+}
+     5b0:	8a 85       	ldd	r24, Y+10	; 0x0a
+     5b2:	00 c0       	rjmp	.+0      	; 0x5b4 <__stack+0x155>
+     5b4:	2a 96       	adiw	r28, 0x0a	; 10
+     5b6:	0f b6       	in	r0, 0x3f	; 63
+     5b8:	f8 94       	cli
+     5ba:	de bf       	out	0x3e, r29	; 62
+     5bc:	0f be       	out	0x3f, r0	; 63
+     5be:	cd bf       	out	0x3d, r28	; 61
+     5c0:	cf 91       	pop	r28
+     5c2:	df 91       	pop	r29
+     5c4:	08 95       	ret
+
+000005c6 <TestCase1>:
+* Test Procedure : 1. Press the first button the two leds shall be turned on.
+*                  2. Press the second button the two leds shall be turned on.
+*************************************************************************************/
+
+void TestCase1(void)
+{
+     5c6:	df 93       	push	r29
+     5c8:	cf 93       	push	r28
+     5ca:	00 d0       	rcall	.+0      	; 0x5cc <TestCase1+0x6>
+     5cc:	cd b7       	in	r28, 0x3d	; 61
+     5ce:	de b7       	in	r29, 0x3e	; 62
+	uint8 button1 = STD_LOW;
+     5d0:	1a 82       	std	Y+2, r1	; 0x02
+	uint8 button2 = STD_LOW;
+     5d2:	19 82       	std	Y+1, r1	; 0x01
+     5d4:	04 c0       	rjmp	.+8      	; 0x5de <TestCase1+0x18>
+
+	/* Wait until the first button is pressed */
+	while(button1 != STD_HIGH)
+	{
+		button1 = Dio_ReadChannel(DioConf_BUTTON1_CHANNEL_ID_INDEX);
+     5d6:	82 e0       	ldi	r24, 0x02	; 2
+     5d8:	0e 94 30 01 	call	0x260	; 0x260 <Dio_ReadChannel>
+     5dc:	8a 83       	std	Y+2, r24	; 0x02
+{
+	uint8 button1 = STD_LOW;
+	uint8 button2 = STD_LOW;
+
+	/* Wait until the first button is pressed */
+	while(button1 != STD_HIGH)
+     5de:	8a 81       	ldd	r24, Y+2	; 0x02
+     5e0:	81 30       	cpi	r24, 0x01	; 1
+     5e2:	c9 f7       	brne	.-14     	; 0x5d6 <TestCase1+0x10>
+	{
+		button1 = Dio_ReadChannel(DioConf_BUTTON1_CHANNEL_ID_INDEX);
+	}
+
+	/* Turn on the two Leds */
+	Dio_WriteChannel(DioConf_LED1_CHANNEL_ID_INDEX,STD_HIGH);
+     5e4:	80 e0       	ldi	r24, 0x00	; 0
+     5e6:	61 e0       	ldi	r22, 0x01	; 1
+     5e8:	0e 94 77 00 	call	0xee	; 0xee <Dio_WriteChannel>
+	Dio_WriteChannel(DioConf_LED2_CHANNEL_ID_INDEX,STD_HIGH);
+     5ec:	81 e0       	ldi	r24, 0x01	; 1
+     5ee:	61 e0       	ldi	r22, 0x01	; 1
+     5f0:	0e 94 77 00 	call	0xee	; 0xee <Dio_WriteChannel>
+     5f4:	04 c0       	rjmp	.+8      	; 0x5fe <TestCase1+0x38>
+
+	/* Wait until the second button is pressed */
+	while(button2 != STD_HIGH)
+	{
+		button2 = Dio_ReadChannel(DioConf_BUTTON2_CHANNEL_ID_INDEX);
+     5f6:	83 e0       	ldi	r24, 0x03	; 3
+     5f8:	0e 94 30 01 	call	0x260	; 0x260 <Dio_ReadChannel>
+     5fc:	89 83       	std	Y+1, r24	; 0x01
+	/* Turn on the two Leds */
+	Dio_WriteChannel(DioConf_LED1_CHANNEL_ID_INDEX,STD_HIGH);
+	Dio_WriteChannel(DioConf_LED2_CHANNEL_ID_INDEX,STD_HIGH);
+
+	/* Wait until the second button is pressed */
+	while(button2 != STD_HIGH)
+     5fe:	89 81       	ldd	r24, Y+1	; 0x01
+     600:	81 30       	cpi	r24, 0x01	; 1
+     602:	c9 f7       	brne	.-14     	; 0x5f6 <TestCase1+0x30>
+	{
+		button2 = Dio_ReadChannel(DioConf_BUTTON2_CHANNEL_ID_INDEX);
+	}
+
+	/* Turn off the two Leds */
+	Dio_WriteChannel(DioConf_LED1_CHANNEL_ID_INDEX,STD_LOW);
+     604:	80 e0       	ldi	r24, 0x00	; 0
+     606:	60 e0       	ldi	r22, 0x00	; 0
+     608:	0e 94 77 00 	call	0xee	; 0xee <Dio_WriteChannel>
+	Dio_WriteChannel(DioConf_LED2_CHANNEL_ID_INDEX,STD_LOW);
+     60c:	81 e0       	ldi	r24, 0x01	; 1
+     60e:	60 e0       	ldi	r22, 0x00	; 0
+     610:	0e 94 77 00 	call	0xee	; 0xee <Dio_WriteChannel>
+}
+     614:	0f 90       	pop	r0
+     616:	0f 90       	pop	r0
+     618:	cf 91       	pop	r28
+     61a:	df 91       	pop	r29
+     61c:	08 95       	ret
+
+0000061e <TestCase2>:
+* Pre-requisits: Dio Module is initialized before Run this test case.
+* Test Procedure : 1. Press the first button the two leds shall be flipped (OFF --> ON).
+*                  2. Press the second button the two leds shall be flipped (ON --> OFF).
+*************************************************************************************/
+void TestCase2(void)
+{
+     61e:	df 93       	push	r29
+     620:	cf 93       	push	r28
+     622:	00 d0       	rcall	.+0      	; 0x624 <TestCase2+0x6>
+     624:	cd b7       	in	r28, 0x3d	; 61
+     626:	de b7       	in	r29, 0x3e	; 62
+	uint8 button1 = STD_LOW;
+     628:	1a 82       	std	Y+2, r1	; 0x02
+	uint8 button2 = STD_LOW;
+     62a:	19 82       	std	Y+1, r1	; 0x01
+     62c:	04 c0       	rjmp	.+8      	; 0x636 <TestCase2+0x18>
+
+	/* Wait until the first button is pressed */
+	while(button1 != STD_HIGH)
+	{
+		button1 = Dio_ReadChannel(DioConf_BUTTON1_CHANNEL_ID_INDEX);
+     62e:	82 e0       	ldi	r24, 0x02	; 2
+     630:	0e 94 30 01 	call	0x260	; 0x260 <Dio_ReadChannel>
+     634:	8a 83       	std	Y+2, r24	; 0x02
+{
+	uint8 button1 = STD_LOW;
+	uint8 button2 = STD_LOW;
+
+	/* Wait until the first button is pressed */
+	while(button1 != STD_HIGH)
+     636:	8a 81       	ldd	r24, Y+2	; 0x02
+     638:	81 30       	cpi	r24, 0x01	; 1
+     63a:	c9 f7       	brne	.-14     	; 0x62e <TestCase2+0x10>
+	{
+		button1 = Dio_ReadChannel(DioConf_BUTTON1_CHANNEL_ID_INDEX);
+	}
+
+	/* Flip the two Leds */
+	Dio_FlipChannel(DioConf_LED1_CHANNEL_ID_INDEX);
+     63c:	80 e0       	ldi	r24, 0x00	; 0
+     63e:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <Dio_FlipChannel>
+	Dio_FlipChannel(DioConf_LED2_CHANNEL_ID_INDEX);
+     642:	81 e0       	ldi	r24, 0x01	; 1
+     644:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <Dio_FlipChannel>
+     648:	04 c0       	rjmp	.+8      	; 0x652 <TestCase2+0x34>
+
+	/* Wait until the second button is pressed */
+	while(button2 != STD_HIGH)
+	{
+		button2 = Dio_ReadChannel(DioConf_BUTTON2_CHANNEL_ID_INDEX);
+     64a:	83 e0       	ldi	r24, 0x03	; 3
+     64c:	0e 94 30 01 	call	0x260	; 0x260 <Dio_ReadChannel>
+     650:	89 83       	std	Y+1, r24	; 0x01
+	/* Flip the two Leds */
+	Dio_FlipChannel(DioConf_LED1_CHANNEL_ID_INDEX);
+	Dio_FlipChannel(DioConf_LED2_CHANNEL_ID_INDEX);
+
+	/* Wait until the second button is pressed */
+	while(button2 != STD_HIGH)
+     652:	89 81       	ldd	r24, Y+1	; 0x01
+     654:	81 30       	cpi	r24, 0x01	; 1
+     656:	c9 f7       	brne	.-14     	; 0x64a <TestCase2+0x2c>
+	{
+		button2 = Dio_ReadChannel(DioConf_BUTTON2_CHANNEL_ID_INDEX);
+	}
+
+	/* Flip the two Leds */
+	Dio_FlipChannel(DioConf_LED1_CHANNEL_ID_INDEX);
+     658:	80 e0       	ldi	r24, 0x00	; 0
+     65a:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <Dio_FlipChannel>
+	Dio_FlipChannel(DioConf_LED2_CHANNEL_ID_INDEX);
+     65e:	81 e0       	ldi	r24, 0x01	; 1
+     660:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <Dio_FlipChannel>
+}
+     664:	0f 90       	pop	r0
+     666:	0f 90       	pop	r0
+     668:	cf 91       	pop	r28
+     66a:	df 91       	pop	r29
+     66c:	08 95       	ret
+
+0000066e <main>:
+
+int main(void)
+{
+     66e:	df 93       	push	r29
+     670:	cf 93       	push	r28
+     672:	cd b7       	in	r28, 0x3d	; 61
+     674:	de b7       	in	r29, 0x3e	; 62
+	/* Configuring the direction of the pins is the responsibility of the PORT driver */
+	Port_Init(&Port_Configuration);
+     676:	88 e6       	ldi	r24, 0x68	; 104
+     678:	90 e0       	ldi	r25, 0x00	; 0
+     67a:	0e 94 4c 03 	call	0x698	; 0x698 <Port_Init>
+//	CLEAR_BIT(DDRB_REG,4); /* Configure Button2 pin as i/p pin */
+//	SET_BIT(DDRC_REG,3);   /* Configure Led1 pin as o/p pin */
+//	SET_BIT(DDRD_REG,6);   /* Configure Led2 pin as o/p pin */
+
+	/* Initialize the Dio Driver */
+	Dio_Init(&Dio_Configuration);
+     67e:	80 e6       	ldi	r24, 0x60	; 96
+     680:	90 e0       	ldi	r25, 0x00	; 0
+     682:	0e 94 56 00 	call	0xac	; 0xac <Dio_Init>
+
+	/* Run the First Test Case */
+	TestCase1();
+     686:	0e 94 e3 02 	call	0x5c6	; 0x5c6 <TestCase1>
+
+	/* Run the Second Test Case */
+	TestCase2();
+     68a:	0e 94 0f 03 	call	0x61e	; 0x61e <TestCase2>
+     68e:	80 e0       	ldi	r24, 0x00	; 0
+     690:	90 e0       	ldi	r25, 0x00	; 0
+}
+     692:	cf 91       	pop	r28
+     694:	df 91       	pop	r29
+     696:	08 95       	ret
+
+00000698 <Port_Init>:
+ * Parameters (inout): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: Initializes the Port Driver module.
+ ************************************************************************************/
+void Port_Init(const Port_ConfigType *ConfigPtr) {
+     698:	df 93       	push	r29
+     69a:	cf 93       	push	r28
+     69c:	00 d0       	rcall	.+0      	; 0x69e <Port_Init+0x6>
+     69e:	cd b7       	in	r28, 0x3d	; 61
+     6a0:	de b7       	in	r29, 0x3e	; 62
+     6a2:	9a 83       	std	Y+2, r25	; 0x02
+     6a4:	89 83       	std	Y+1, r24	; 0x01
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+	/* check if the input configuration pointer is not a NULL_PTR */
+	if (NULL_PTR == ConfigPtr) {
+     6a6:	89 81       	ldd	r24, Y+1	; 0x01
+     6a8:	9a 81       	ldd	r25, Y+2	; 0x02
+     6aa:	00 97       	sbiw	r24, 0x00	; 0
+     6ac:	41 f4       	brne	.+16     	; 0x6be <Port_Init+0x26>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID, PORT_INIT_SID,
+     6ae:	8c e7       	ldi	r24, 0x7C	; 124
+     6b0:	90 e0       	ldi	r25, 0x00	; 0
+     6b2:	60 e0       	ldi	r22, 0x00	; 0
+     6b4:	40 e0       	ldi	r20, 0x00	; 0
+     6b6:	2f e0       	ldi	r18, 0x0F	; 15
+     6b8:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     6bc:	0b c0       	rjmp	.+22     	; 0x6d4 <Port_Init+0x3c>
+		/*
+		 * Set the module state to initialized and point to the PB configuration structure using a global pointer.
+		 * This global pointer is global to be used by other functions to read the PB configuration structures
+		 * then to set direction and initial value for pins
+		 */
+		Port_PortChannels = ConfigPtr->Channel; /* address of the first Channels structure --> Channels[0] */
+     6be:	89 81       	ldd	r24, Y+1	; 0x01
+     6c0:	9a 81       	ldd	r25, Y+2	; 0x02
+     6c2:	90 93 2c 01 	sts	0x012C, r25
+     6c6:	80 93 2b 01 	sts	0x012B, r24
+		Port_setConfiguration();
+     6ca:	0e 94 a5 05 	call	0xb4a	; 0xb4a <Port_setConfiguration>
+		Port_Status = PORT_INITIALIZED;
+     6ce:	81 e0       	ldi	r24, 0x01	; 1
+     6d0:	80 93 2d 01 	sts	0x012D, r24
+	}
+}
+     6d4:	0f 90       	pop	r0
+     6d6:	0f 90       	pop	r0
+     6d8:	cf 91       	pop	r28
+     6da:	df 91       	pop	r29
+     6dc:	08 95       	ret
+
+000006de <Port_SetPinDirection>:
+ * Parameters (out): None
+ * Return value: None
+ * Description: Sets the port pin direction.
+ ************************************************************************************/
+#if(PORT_SET_PIN_DIRECTION_API==STD_ON)
+void Port_SetPinDirection(Port_PinType Pin, Port_PinDirectionType Direction) {
+     6de:	df 93       	push	r29
+     6e0:	cf 93       	push	r28
+     6e2:	cd b7       	in	r28, 0x3d	; 61
+     6e4:	de b7       	in	r29, 0x3e	; 62
+     6e6:	2b 97       	sbiw	r28, 0x0b	; 11
+     6e8:	0f b6       	in	r0, 0x3f	; 63
+     6ea:	f8 94       	cli
+     6ec:	de bf       	out	0x3e, r29	; 62
+     6ee:	0f be       	out	0x3f, r0	; 63
+     6f0:	cd bf       	out	0x3d, r28	; 61
+     6f2:	88 87       	std	Y+8, r24	; 0x08
+     6f4:	69 87       	std	Y+9, r22	; 0x09
+	Port_PinType *DDR_Ptr = NULL_PTR;
+     6f6:	1d 82       	std	Y+5, r1	; 0x05
+     6f8:	1c 82       	std	Y+4, r1	; 0x04
+	Port_PinType Pin_Num;
+	Port_PinType Port_Num;
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+	/* check if the input configuration pointer is not a NULL_PTR */
+	if (NULL_PTR == Port_PortChannels) {
+     6fa:	80 91 2b 01 	lds	r24, 0x012B
+     6fe:	90 91 2c 01 	lds	r25, 0x012C
+     702:	00 97       	sbiw	r24, 0x00	; 0
+     704:	41 f4       	brne	.+16     	; 0x716 <Port_SetPinDirection+0x38>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     706:	8c e7       	ldi	r24, 0x7C	; 124
+     708:	90 e0       	ldi	r25, 0x00	; 0
+     70a:	60 e0       	ldi	r22, 0x00	; 0
+     70c:	41 e0       	ldi	r20, 0x01	; 1
+     70e:	2f e0       	ldi	r18, 0x0F	; 15
+     710:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     714:	de c0       	rjmp	.+444    	; 0x8d2 <Port_SetPinDirection+0x1f4>
+		PORT_SET_PIN_DIRECTION_SID,
+		PORT_E_UNINIT);
+	} else if (Pin > PINS_NUM) {
+     716:	88 85       	ldd	r24, Y+8	; 0x08
+     718:	81 32       	cpi	r24, 0x21	; 33
+     71a:	40 f0       	brcs	.+16     	; 0x72c <Port_SetPinDirection+0x4e>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     71c:	8c e7       	ldi	r24, 0x7C	; 124
+     71e:	90 e0       	ldi	r25, 0x00	; 0
+     720:	60 e0       	ldi	r22, 0x00	; 0
+     722:	41 e0       	ldi	r20, 0x01	; 1
+     724:	2a e0       	ldi	r18, 0x0A	; 10
+     726:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     72a:	d3 c0       	rjmp	.+422    	; 0x8d2 <Port_SetPinDirection+0x1f4>
+#endif
+	{
+		/* 1-check pin to get port number and pin number related to port by check range of every port
+		 * 2-get direction dependence on port number
+		 * 3-check and set Direction is input or output*/
+		Port_getPinNumberAndPortNumber(Pin, &Pin_Num, &Port_Num);
+     72c:	9e 01       	movw	r18, r28
+     72e:	2a 5f       	subi	r18, 0xFA	; 250
+     730:	3f 4f       	sbci	r19, 0xFF	; 255
+     732:	ae 01       	movw	r20, r28
+     734:	49 5f       	subi	r20, 0xF9	; 249
+     736:	5f 4f       	sbci	r21, 0xFF	; 255
+     738:	88 85       	ldd	r24, Y+8	; 0x08
+     73a:	b9 01       	movw	r22, r18
+     73c:	0e 94 57 05 	call	0xaae	; 0xaae <Port_getPinNumberAndPortNumber>
+		switch (Port_Num) {
+     740:	8f 81       	ldd	r24, Y+7	; 0x07
+     742:	28 2f       	mov	r18, r24
+     744:	30 e0       	ldi	r19, 0x00	; 0
+     746:	3b 87       	std	Y+11, r19	; 0x0b
+     748:	2a 87       	std	Y+10, r18	; 0x0a
+     74a:	8a 85       	ldd	r24, Y+10	; 0x0a
+     74c:	9b 85       	ldd	r25, Y+11	; 0x0b
+     74e:	81 30       	cpi	r24, 0x01	; 1
+     750:	91 05       	cpc	r25, r1
+     752:	d1 f0       	breq	.+52     	; 0x788 <Port_SetPinDirection+0xaa>
+     754:	2a 85       	ldd	r18, Y+10	; 0x0a
+     756:	3b 85       	ldd	r19, Y+11	; 0x0b
+     758:	22 30       	cpi	r18, 0x02	; 2
+     75a:	31 05       	cpc	r19, r1
+     75c:	2c f4       	brge	.+10     	; 0x768 <Port_SetPinDirection+0x8a>
+     75e:	8a 85       	ldd	r24, Y+10	; 0x0a
+     760:	9b 85       	ldd	r25, Y+11	; 0x0b
+     762:	00 97       	sbiw	r24, 0x00	; 0
+     764:	61 f0       	breq	.+24     	; 0x77e <Port_SetPinDirection+0xa0>
+     766:	1e c0       	rjmp	.+60     	; 0x7a4 <Port_SetPinDirection+0xc6>
+     768:	2a 85       	ldd	r18, Y+10	; 0x0a
+     76a:	3b 85       	ldd	r19, Y+11	; 0x0b
+     76c:	22 30       	cpi	r18, 0x02	; 2
+     76e:	31 05       	cpc	r19, r1
+     770:	81 f0       	breq	.+32     	; 0x792 <Port_SetPinDirection+0xb4>
+     772:	8a 85       	ldd	r24, Y+10	; 0x0a
+     774:	9b 85       	ldd	r25, Y+11	; 0x0b
+     776:	83 30       	cpi	r24, 0x03	; 3
+     778:	91 05       	cpc	r25, r1
+     77a:	81 f0       	breq	.+32     	; 0x79c <Port_SetPinDirection+0xbe>
+     77c:	13 c0       	rjmp	.+38     	; 0x7a4 <Port_SetPinDirection+0xc6>
+		case 0:
+			DDR_Ptr = &DDRA_REG;
+     77e:	8a e3       	ldi	r24, 0x3A	; 58
+     780:	90 e0       	ldi	r25, 0x00	; 0
+     782:	9d 83       	std	Y+5, r25	; 0x05
+     784:	8c 83       	std	Y+4, r24	; 0x04
+     786:	0e c0       	rjmp	.+28     	; 0x7a4 <Port_SetPinDirection+0xc6>
+			break;
+		case 1:
+			DDR_Ptr = &DDRB_REG;
+     788:	87 e3       	ldi	r24, 0x37	; 55
+     78a:	90 e0       	ldi	r25, 0x00	; 0
+     78c:	9d 83       	std	Y+5, r25	; 0x05
+     78e:	8c 83       	std	Y+4, r24	; 0x04
+     790:	09 c0       	rjmp	.+18     	; 0x7a4 <Port_SetPinDirection+0xc6>
+			break;
+		case 2:
+			DDR_Ptr = &DDRC_REG;
+     792:	84 e3       	ldi	r24, 0x34	; 52
+     794:	90 e0       	ldi	r25, 0x00	; 0
+     796:	9d 83       	std	Y+5, r25	; 0x05
+     798:	8c 83       	std	Y+4, r24	; 0x04
+     79a:	04 c0       	rjmp	.+8      	; 0x7a4 <Port_SetPinDirection+0xc6>
+			break;
+		case 3:
+			DDR_Ptr = &DDRD_REG;
+     79c:	81 e3       	ldi	r24, 0x31	; 49
+     79e:	90 e0       	ldi	r25, 0x00	; 0
+     7a0:	9d 83       	std	Y+5, r25	; 0x05
+     7a2:	8c 83       	std	Y+4, r24	; 0x04
+		 * 1-get position of configured pin inside Port_PortChannels
+		 * 2-check if find element if not found report error
+		 * 3-check if changeable yes set direction
+		 * 4-check if changeable no  report error
+		 * */
+		uint8 position = -1;
+     7a4:	8f ef       	ldi	r24, 0xFF	; 255
+     7a6:	8b 83       	std	Y+3, r24	; 0x03
+		for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     7a8:	1a 82       	std	Y+2, r1	; 0x02
+     7aa:	19 82       	std	Y+1, r1	; 0x01
+     7ac:	2f c0       	rjmp	.+94     	; 0x80c <Port_SetPinDirection+0x12e>
+			if (Port_PortChannels[i].pin_num == Pin_Num
+     7ae:	40 91 2b 01 	lds	r20, 0x012B
+     7b2:	50 91 2c 01 	lds	r21, 0x012C
+     7b6:	29 81       	ldd	r18, Y+1	; 0x01
+     7b8:	3a 81       	ldd	r19, Y+2	; 0x02
+     7ba:	c9 01       	movw	r24, r18
+     7bc:	88 0f       	add	r24, r24
+     7be:	99 1f       	adc	r25, r25
+     7c0:	82 0f       	add	r24, r18
+     7c2:	93 1f       	adc	r25, r19
+     7c4:	88 0f       	add	r24, r24
+     7c6:	99 1f       	adc	r25, r25
+     7c8:	fa 01       	movw	r30, r20
+     7ca:	e8 0f       	add	r30, r24
+     7cc:	f9 1f       	adc	r31, r25
+     7ce:	91 81       	ldd	r25, Z+1	; 0x01
+     7d0:	8e 81       	ldd	r24, Y+6	; 0x06
+     7d2:	98 17       	cp	r25, r24
+     7d4:	b1 f4       	brne	.+44     	; 0x802 <Port_SetPinDirection+0x124>
+     7d6:	40 91 2b 01 	lds	r20, 0x012B
+     7da:	50 91 2c 01 	lds	r21, 0x012C
+     7de:	29 81       	ldd	r18, Y+1	; 0x01
+     7e0:	3a 81       	ldd	r19, Y+2	; 0x02
+     7e2:	c9 01       	movw	r24, r18
+     7e4:	88 0f       	add	r24, r24
+     7e6:	99 1f       	adc	r25, r25
+     7e8:	82 0f       	add	r24, r18
+     7ea:	93 1f       	adc	r25, r19
+     7ec:	88 0f       	add	r24, r24
+     7ee:	99 1f       	adc	r25, r25
+     7f0:	fa 01       	movw	r30, r20
+     7f2:	e8 0f       	add	r30, r24
+     7f4:	f9 1f       	adc	r31, r25
+     7f6:	90 81       	ld	r25, Z
+     7f8:	8f 81       	ldd	r24, Y+7	; 0x07
+     7fa:	98 17       	cp	r25, r24
+     7fc:	11 f4       	brne	.+4      	; 0x802 <Port_SetPinDirection+0x124>
+					&& Port_PortChannels[i].port == Port_Num) {
+				position = i;
+     7fe:	89 81       	ldd	r24, Y+1	; 0x01
+     800:	8b 83       	std	Y+3, r24	; 0x03
+		 * 2-check if find element if not found report error
+		 * 3-check if changeable yes set direction
+		 * 4-check if changeable no  report error
+		 * */
+		uint8 position = -1;
+		for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     802:	89 81       	ldd	r24, Y+1	; 0x01
+     804:	9a 81       	ldd	r25, Y+2	; 0x02
+     806:	01 96       	adiw	r24, 0x01	; 1
+     808:	9a 83       	std	Y+2, r25	; 0x02
+     80a:	89 83       	std	Y+1, r24	; 0x01
+     80c:	89 81       	ldd	r24, Y+1	; 0x01
+     80e:	9a 81       	ldd	r25, Y+2	; 0x02
+     810:	80 32       	cpi	r24, 0x20	; 32
+     812:	91 05       	cpc	r25, r1
+     814:	60 f2       	brcs	.-104    	; 0x7ae <Port_SetPinDirection+0xd0>
+				position = i;
+			}
+		}
+
+		if (-1 != position) {
+			if (YES == Port_PortChannels[position].directionChangeable) {
+     816:	40 91 2b 01 	lds	r20, 0x012B
+     81a:	50 91 2c 01 	lds	r21, 0x012C
+     81e:	8b 81       	ldd	r24, Y+3	; 0x03
+     820:	28 2f       	mov	r18, r24
+     822:	30 e0       	ldi	r19, 0x00	; 0
+     824:	c9 01       	movw	r24, r18
+     826:	88 0f       	add	r24, r24
+     828:	99 1f       	adc	r25, r25
+     82a:	82 0f       	add	r24, r18
+     82c:	93 1f       	adc	r25, r19
+     82e:	88 0f       	add	r24, r24
+     830:	99 1f       	adc	r25, r25
+     832:	fa 01       	movw	r30, r20
+     834:	e8 0f       	add	r30, r24
+     836:	f9 1f       	adc	r31, r25
+     838:	84 81       	ldd	r24, Z+4	; 0x04
+     83a:	88 23       	and	r24, r24
+     83c:	79 f5       	brne	.+94     	; 0x89c <Port_SetPinDirection+0x1be>
+				if (PORT_PIN_IN == Direction) {
+     83e:	89 85       	ldd	r24, Y+9	; 0x09
+     840:	88 23       	and	r24, r24
+     842:	a9 f4       	brne	.+42     	; 0x86e <Port_SetPinDirection+0x190>
+					CLEAR_BIT(*DDR_Ptr, Pin_Num);
+     844:	ec 81       	ldd	r30, Y+4	; 0x04
+     846:	fd 81       	ldd	r31, Y+5	; 0x05
+     848:	80 81       	ld	r24, Z
+     84a:	48 2f       	mov	r20, r24
+     84c:	8e 81       	ldd	r24, Y+6	; 0x06
+     84e:	28 2f       	mov	r18, r24
+     850:	30 e0       	ldi	r19, 0x00	; 0
+     852:	81 e0       	ldi	r24, 0x01	; 1
+     854:	90 e0       	ldi	r25, 0x00	; 0
+     856:	02 2e       	mov	r0, r18
+     858:	02 c0       	rjmp	.+4      	; 0x85e <Port_SetPinDirection+0x180>
+     85a:	88 0f       	add	r24, r24
+     85c:	99 1f       	adc	r25, r25
+     85e:	0a 94       	dec	r0
+     860:	e2 f7       	brpl	.-8      	; 0x85a <Port_SetPinDirection+0x17c>
+     862:	80 95       	com	r24
+     864:	84 23       	and	r24, r20
+     866:	ec 81       	ldd	r30, Y+4	; 0x04
+     868:	fd 81       	ldd	r31, Y+5	; 0x05
+     86a:	80 83       	st	Z, r24
+     86c:	32 c0       	rjmp	.+100    	; 0x8d2 <Port_SetPinDirection+0x1f4>
+				} else if (PORT_PIN_OUT == Direction) {
+     86e:	89 85       	ldd	r24, Y+9	; 0x09
+     870:	81 30       	cpi	r24, 0x01	; 1
+     872:	79 f5       	brne	.+94     	; 0x8d2 <Port_SetPinDirection+0x1f4>
+					SET_BIT(*DDR_Ptr, Pin_Num);
+     874:	ec 81       	ldd	r30, Y+4	; 0x04
+     876:	fd 81       	ldd	r31, Y+5	; 0x05
+     878:	80 81       	ld	r24, Z
+     87a:	48 2f       	mov	r20, r24
+     87c:	8e 81       	ldd	r24, Y+6	; 0x06
+     87e:	28 2f       	mov	r18, r24
+     880:	30 e0       	ldi	r19, 0x00	; 0
+     882:	81 e0       	ldi	r24, 0x01	; 1
+     884:	90 e0       	ldi	r25, 0x00	; 0
+     886:	02 2e       	mov	r0, r18
+     888:	02 c0       	rjmp	.+4      	; 0x88e <Port_SetPinDirection+0x1b0>
+     88a:	88 0f       	add	r24, r24
+     88c:	99 1f       	adc	r25, r25
+     88e:	0a 94       	dec	r0
+     890:	e2 f7       	brpl	.-8      	; 0x88a <Port_SetPinDirection+0x1ac>
+     892:	84 2b       	or	r24, r20
+     894:	ec 81       	ldd	r30, Y+4	; 0x04
+     896:	fd 81       	ldd	r31, Y+5	; 0x05
+     898:	80 83       	st	Z, r24
+     89a:	1b c0       	rjmp	.+54     	; 0x8d2 <Port_SetPinDirection+0x1f4>
+				} else {
+
+				}
+
+			} else if (NO == Port_PortChannels[position].directionChangeable) {
+     89c:	40 91 2b 01 	lds	r20, 0x012B
+     8a0:	50 91 2c 01 	lds	r21, 0x012C
+     8a4:	8b 81       	ldd	r24, Y+3	; 0x03
+     8a6:	28 2f       	mov	r18, r24
+     8a8:	30 e0       	ldi	r19, 0x00	; 0
+     8aa:	c9 01       	movw	r24, r18
+     8ac:	88 0f       	add	r24, r24
+     8ae:	99 1f       	adc	r25, r25
+     8b0:	82 0f       	add	r24, r18
+     8b2:	93 1f       	adc	r25, r19
+     8b4:	88 0f       	add	r24, r24
+     8b6:	99 1f       	adc	r25, r25
+     8b8:	fa 01       	movw	r30, r20
+     8ba:	e8 0f       	add	r30, r24
+     8bc:	f9 1f       	adc	r31, r25
+     8be:	84 81       	ldd	r24, Z+4	; 0x04
+     8c0:	81 30       	cpi	r24, 0x01	; 1
+     8c2:	39 f4       	brne	.+14     	; 0x8d2 <Port_SetPinDirection+0x1f4>
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+				Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     8c4:	8c e7       	ldi	r24, 0x7C	; 124
+     8c6:	90 e0       	ldi	r25, 0x00	; 0
+     8c8:	60 e0       	ldi	r22, 0x00	; 0
+     8ca:	41 e0       	ldi	r20, 0x01	; 1
+     8cc:	2b e0       	ldi	r18, 0x0B	; 11
+     8ce:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+			PORT_SET_PIN_DIRECTION_SID,
+			PORT_E_PARAM_PIN);
+#endif
+		}
+	}
+}
+     8d2:	2b 96       	adiw	r28, 0x0b	; 11
+     8d4:	0f b6       	in	r0, 0x3f	; 63
+     8d6:	f8 94       	cli
+     8d8:	de bf       	out	0x3e, r29	; 62
+     8da:	0f be       	out	0x3f, r0	; 63
+     8dc:	cd bf       	out	0x3d, r28	; 61
+     8de:	cf 91       	pop	r28
+     8e0:	df 91       	pop	r29
+     8e2:	08 95       	ret
+
+000008e4 <Port_RefreshPortDirection>:
+ * Parameters (inout): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: SRefreshes port direction.
+ ************************************************************************************/
+void Port_RefreshPortDirection(void) {
+     8e4:	df 93       	push	r29
+     8e6:	cf 93       	push	r28
+     8e8:	cd b7       	in	r28, 0x3d	; 61
+     8ea:	de b7       	in	r29, 0x3e	; 62
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+	/* Check if input pointer is not Null pointer */
+	if (NULL_PTR == Port_PortChannels) {
+     8ec:	80 91 2b 01 	lds	r24, 0x012B
+     8f0:	90 91 2c 01 	lds	r25, 0x012C
+     8f4:	00 97       	sbiw	r24, 0x00	; 0
+     8f6:	41 f4       	brne	.+16     	; 0x908 <Port_RefreshPortDirection+0x24>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     8f8:	8c e7       	ldi	r24, 0x7C	; 124
+     8fa:	90 e0       	ldi	r25, 0x00	; 0
+     8fc:	60 e0       	ldi	r22, 0x00	; 0
+     8fe:	42 e0       	ldi	r20, 0x02	; 2
+     900:	2f e0       	ldi	r18, 0x0F	; 15
+     902:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     906:	02 c0       	rjmp	.+4      	; 0x90c <Port_RefreshPortDirection+0x28>
+		PORT_Refresh_PORT_DIRECTION_SID,
+		PORT_E_UNINIT);
+	} else
+#endif
+	{
+		Port_setDirection();
+     908:	0e 94 67 07 	call	0xece	; 0xece <Port_setDirection>
+	}
+}
+     90c:	cf 91       	pop	r28
+     90e:	df 91       	pop	r29
+     910:	08 95       	ret
+
+00000912 <Port_SetPinMode>:
+ * Parameters (inout): None
+ * Parameters (out)  : None
+ * Return value: None
+ * Description: Sets the port pin mode..
+ ************************************************************************************/
+void Port_SetPinMode(Port_PinType Pin, Port_PinModeType Mode) {
+     912:	df 93       	push	r29
+     914:	cf 93       	push	r28
+     916:	cd b7       	in	r28, 0x3d	; 61
+     918:	de b7       	in	r29, 0x3e	; 62
+     91a:	27 97       	sbiw	r28, 0x07	; 7
+     91c:	0f b6       	in	r0, 0x3f	; 63
+     91e:	f8 94       	cli
+     920:	de bf       	out	0x3e, r29	; 62
+     922:	0f be       	out	0x3f, r0	; 63
+     924:	cd bf       	out	0x3d, r28	; 61
+     926:	8e 83       	std	Y+6, r24	; 0x06
+     928:	6f 83       	std	Y+7, r22	; 0x07
+	Port_PinType Pin_Num;
+	Port_PinType Port_Num;
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+	/* Check if input pointer is not Null pointer */
+	if (NULL_PTR == Port_PortChannels) {
+     92a:	80 91 2b 01 	lds	r24, 0x012B
+     92e:	90 91 2c 01 	lds	r25, 0x012C
+     932:	00 97       	sbiw	r24, 0x00	; 0
+     934:	41 f4       	brne	.+16     	; 0x946 <Port_SetPinMode+0x34>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     936:	8c e7       	ldi	r24, 0x7C	; 124
+     938:	90 e0       	ldi	r25, 0x00	; 0
+     93a:	60 e0       	ldi	r22, 0x00	; 0
+     93c:	44 e0       	ldi	r20, 0x04	; 4
+     93e:	2f e0       	ldi	r18, 0x0F	; 15
+     940:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     944:	7d c0       	rjmp	.+250    	; 0xa40 <Port_SetPinMode+0x12e>
+		PORT_SET_PIN_MODE_SID,
+		PORT_E_UNINIT);
+	} else if (Pin > PINS_NUM) {
+     946:	8e 81       	ldd	r24, Y+6	; 0x06
+     948:	81 32       	cpi	r24, 0x21	; 33
+     94a:	40 f0       	brcs	.+16     	; 0x95c <Port_SetPinMode+0x4a>
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     94c:	8c e7       	ldi	r24, 0x7C	; 124
+     94e:	90 e0       	ldi	r25, 0x00	; 0
+     950:	60 e0       	ldi	r22, 0x00	; 0
+     952:	44 e0       	ldi	r20, 0x04	; 4
+     954:	2a e0       	ldi	r18, 0x0A	; 10
+     956:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     95a:	72 c0       	rjmp	.+228    	; 0xa40 <Port_SetPinMode+0x12e>
+#endif
+
+	{
+		/* 1-check pin to get port number and pin number related to port by check range of every port
+		 * 2-get direction dependence on port number*/
+		Port_getPinNumberAndPortNumber(Pin, &Pin_Num, &Port_Num);
+     95c:	9e 01       	movw	r18, r28
+     95e:	2c 5f       	subi	r18, 0xFC	; 252
+     960:	3f 4f       	sbci	r19, 0xFF	; 255
+     962:	ae 01       	movw	r20, r28
+     964:	4b 5f       	subi	r20, 0xFB	; 251
+     966:	5f 4f       	sbci	r21, 0xFF	; 255
+     968:	8e 81       	ldd	r24, Y+6	; 0x06
+     96a:	b9 01       	movw	r22, r18
+     96c:	0e 94 57 05 	call	0xaae	; 0xaae <Port_getPinNumberAndPortNumber>
+		/* 1-get position of configured pin inside Port_PortChannels
+		 * 2-check if find element if not found report error
+		 * 3-check if changeable yes set Mode
+		 * 4-check if changeable no  report error
+		 * */
+		uint8 position = -1;
+     970:	8f ef       	ldi	r24, 0xFF	; 255
+     972:	8b 83       	std	Y+3, r24	; 0x03
+		for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     974:	1a 82       	std	Y+2, r1	; 0x02
+     976:	19 82       	std	Y+1, r1	; 0x01
+     978:	2f c0       	rjmp	.+94     	; 0x9d8 <Port_SetPinMode+0xc6>
+			if (Port_PortChannels[i].pin_num == Pin_Num
+     97a:	40 91 2b 01 	lds	r20, 0x012B
+     97e:	50 91 2c 01 	lds	r21, 0x012C
+     982:	29 81       	ldd	r18, Y+1	; 0x01
+     984:	3a 81       	ldd	r19, Y+2	; 0x02
+     986:	c9 01       	movw	r24, r18
+     988:	88 0f       	add	r24, r24
+     98a:	99 1f       	adc	r25, r25
+     98c:	82 0f       	add	r24, r18
+     98e:	93 1f       	adc	r25, r19
+     990:	88 0f       	add	r24, r24
+     992:	99 1f       	adc	r25, r25
+     994:	fa 01       	movw	r30, r20
+     996:	e8 0f       	add	r30, r24
+     998:	f9 1f       	adc	r31, r25
+     99a:	91 81       	ldd	r25, Z+1	; 0x01
+     99c:	8c 81       	ldd	r24, Y+4	; 0x04
+     99e:	98 17       	cp	r25, r24
+     9a0:	b1 f4       	brne	.+44     	; 0x9ce <Port_SetPinMode+0xbc>
+     9a2:	40 91 2b 01 	lds	r20, 0x012B
+     9a6:	50 91 2c 01 	lds	r21, 0x012C
+     9aa:	29 81       	ldd	r18, Y+1	; 0x01
+     9ac:	3a 81       	ldd	r19, Y+2	; 0x02
+     9ae:	c9 01       	movw	r24, r18
+     9b0:	88 0f       	add	r24, r24
+     9b2:	99 1f       	adc	r25, r25
+     9b4:	82 0f       	add	r24, r18
+     9b6:	93 1f       	adc	r25, r19
+     9b8:	88 0f       	add	r24, r24
+     9ba:	99 1f       	adc	r25, r25
+     9bc:	fa 01       	movw	r30, r20
+     9be:	e8 0f       	add	r30, r24
+     9c0:	f9 1f       	adc	r31, r25
+     9c2:	90 81       	ld	r25, Z
+     9c4:	8d 81       	ldd	r24, Y+5	; 0x05
+     9c6:	98 17       	cp	r25, r24
+     9c8:	11 f4       	brne	.+4      	; 0x9ce <Port_SetPinMode+0xbc>
+					&& Port_PortChannels[i].port == Port_Num) {
+				position = i;
+     9ca:	89 81       	ldd	r24, Y+1	; 0x01
+     9cc:	8b 83       	std	Y+3, r24	; 0x03
+		 * 2-check if find element if not found report error
+		 * 3-check if changeable yes set Mode
+		 * 4-check if changeable no  report error
+		 * */
+		uint8 position = -1;
+		for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     9ce:	89 81       	ldd	r24, Y+1	; 0x01
+     9d0:	9a 81       	ldd	r25, Y+2	; 0x02
+     9d2:	01 96       	adiw	r24, 0x01	; 1
+     9d4:	9a 83       	std	Y+2, r25	; 0x02
+     9d6:	89 83       	std	Y+1, r24	; 0x01
+     9d8:	89 81       	ldd	r24, Y+1	; 0x01
+     9da:	9a 81       	ldd	r25, Y+2	; 0x02
+     9dc:	80 32       	cpi	r24, 0x20	; 32
+     9de:	91 05       	cpc	r25, r1
+     9e0:	60 f2       	brcs	.-104    	; 0x97a <Port_SetPinMode+0x68>
+				position = i;
+			}
+		}
+
+		if (-1 != position) {
+			if (CHANGABLE == Port_PortChannels[position].modeTypeChangeable) {
+     9e2:	40 91 2b 01 	lds	r20, 0x012B
+     9e6:	50 91 2c 01 	lds	r21, 0x012C
+     9ea:	8b 81       	ldd	r24, Y+3	; 0x03
+     9ec:	28 2f       	mov	r18, r24
+     9ee:	30 e0       	ldi	r19, 0x00	; 0
+     9f0:	c9 01       	movw	r24, r18
+     9f2:	88 0f       	add	r24, r24
+     9f4:	99 1f       	adc	r25, r25
+     9f6:	82 0f       	add	r24, r18
+     9f8:	93 1f       	adc	r25, r19
+     9fa:	88 0f       	add	r24, r24
+     9fc:	99 1f       	adc	r25, r25
+     9fe:	fa 01       	movw	r30, r20
+     a00:	e8 0f       	add	r30, r24
+     a02:	f9 1f       	adc	r31, r25
+     a04:	85 81       	ldd	r24, Z+5	; 0x05
+     a06:	81 30       	cpi	r24, 0x01	; 1
+     a08:	d9 f0       	breq	.+54     	; 0xa40 <Port_SetPinMode+0x12e>
+				/* not applicable in AVR MicroController */
+			} else if (NOT_CHANGABLE
+     a0a:	40 91 2b 01 	lds	r20, 0x012B
+     a0e:	50 91 2c 01 	lds	r21, 0x012C
+     a12:	8b 81       	ldd	r24, Y+3	; 0x03
+     a14:	28 2f       	mov	r18, r24
+     a16:	30 e0       	ldi	r19, 0x00	; 0
+     a18:	c9 01       	movw	r24, r18
+     a1a:	88 0f       	add	r24, r24
+     a1c:	99 1f       	adc	r25, r25
+     a1e:	82 0f       	add	r24, r18
+     a20:	93 1f       	adc	r25, r19
+     a22:	88 0f       	add	r24, r24
+     a24:	99 1f       	adc	r25, r25
+     a26:	fa 01       	movw	r30, r20
+     a28:	e8 0f       	add	r30, r24
+     a2a:	f9 1f       	adc	r31, r25
+     a2c:	85 81       	ldd	r24, Z+5	; 0x05
+     a2e:	88 23       	and	r24, r24
+     a30:	39 f4       	brne	.+14     	; 0xa40 <Port_SetPinMode+0x12e>
+					== Port_PortChannels[position].modeTypeChangeable) {
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+				Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     a32:	8c e7       	ldi	r24, 0x7C	; 124
+     a34:	90 e0       	ldi	r25, 0x00	; 0
+     a36:	60 e0       	ldi	r22, 0x00	; 0
+     a38:	44 e0       	ldi	r20, 0x04	; 4
+     a3a:	2e e0       	ldi	r18, 0x0E	; 14
+     a3c:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+			PORT_SET_PIN_MODE_SID,
+			PORT_E_PARAM_PIN);
+#endif
+		}
+	}
+}
+     a40:	27 96       	adiw	r28, 0x07	; 7
+     a42:	0f b6       	in	r0, 0x3f	; 63
+     a44:	f8 94       	cli
+     a46:	de bf       	out	0x3e, r29	; 62
+     a48:	0f be       	out	0x3f, r0	; 63
+     a4a:	cd bf       	out	0x3d, r28	; 61
+     a4c:	cf 91       	pop	r28
+     a4e:	df 91       	pop	r29
+     a50:	08 95       	ret
+
+00000a52 <Port_GetVersionInfo>:
+ * Parameters (out): versioninfo - Pointer to where to store the version information of this module.
+ * Return value: None
+ * Description: Returns the version information of this module.
+ ************************************************************************************/
+#if (PORT_VERSION_INFO_API == STD_ON)
+void Port_GetVersionInfo(Std_VersionInfoType *versioninfo) {
+     a52:	df 93       	push	r29
+     a54:	cf 93       	push	r28
+     a56:	00 d0       	rcall	.+0      	; 0xa58 <Port_GetVersionInfo+0x6>
+     a58:	cd b7       	in	r28, 0x3d	; 61
+     a5a:	de b7       	in	r29, 0x3e	; 62
+     a5c:	9a 83       	std	Y+2, r25	; 0x02
+     a5e:	89 83       	std	Y+1, r24	; 0x01
+#if (PORT_DEV_ERROR_DETECT == STD_ON)
+	/* Check if input pointer is not Null pointer */
+	if (NULL_PTR == versioninfo) {
+     a60:	89 81       	ldd	r24, Y+1	; 0x01
+     a62:	9a 81       	ldd	r25, Y+2	; 0x02
+     a64:	00 97       	sbiw	r24, 0x00	; 0
+     a66:	41 f4       	brne	.+16     	; 0xa78 <Port_GetVersionInfo+0x26>
+		/* Report to DET  */
+		Det_ReportError(PORT_MODULE_ID, PORT_INSTANCE_ID,
+     a68:	8c e7       	ldi	r24, 0x7C	; 124
+     a6a:	90 e0       	ldi	r25, 0x00	; 0
+     a6c:	60 e0       	ldi	r22, 0x00	; 0
+     a6e:	43 e0       	ldi	r20, 0x03	; 3
+     a70:	20 e1       	ldi	r18, 0x10	; 16
+     a72:	0e 94 49 00 	call	0x92	; 0x92 <Det_ReportError>
+     a76:	16 c0       	rjmp	.+44     	; 0xaa4 <Port_GetVersionInfo+0x52>
+		PORT_GET_VERSION_INFO_SID, PORT_E_PARAM_POINTER);
+	} else
+#endif
+	{
+		/* Copy the vendor Id */
+		versioninfo->vendorID = (uint16) PORT_VENDOR_ID;
+     a78:	e9 81       	ldd	r30, Y+1	; 0x01
+     a7a:	fa 81       	ldd	r31, Y+2	; 0x02
+     a7c:	86 e4       	ldi	r24, 0x46	; 70
+     a7e:	90 e0       	ldi	r25, 0x00	; 0
+     a80:	91 83       	std	Z+1, r25	; 0x01
+     a82:	80 83       	st	Z, r24
+		/* Copy the module Id */
+		versioninfo->moduleID = (uint16) PORT_MODULE_ID;
+     a84:	e9 81       	ldd	r30, Y+1	; 0x01
+     a86:	fa 81       	ldd	r31, Y+2	; 0x02
+     a88:	8c e7       	ldi	r24, 0x7C	; 124
+     a8a:	90 e0       	ldi	r25, 0x00	; 0
+     a8c:	93 83       	std	Z+3, r25	; 0x03
+     a8e:	82 83       	std	Z+2, r24	; 0x02
+		/* Copy Software Major Version */
+		versioninfo->sw_major_version = (uint8) PORT_SW_MAJOR_VERSION;
+     a90:	e9 81       	ldd	r30, Y+1	; 0x01
+     a92:	fa 81       	ldd	r31, Y+2	; 0x02
+     a94:	81 e0       	ldi	r24, 0x01	; 1
+     a96:	84 83       	std	Z+4, r24	; 0x04
+		/* Copy Software Minor Version */
+		versioninfo->sw_minor_version = (uint8) PORT_SW_MINOR_VERSION;
+     a98:	e9 81       	ldd	r30, Y+1	; 0x01
+     a9a:	fa 81       	ldd	r31, Y+2	; 0x02
+     a9c:	15 82       	std	Z+5, r1	; 0x05
+		/* Copy Software Patch Version */
+		versioninfo->sw_patch_version = (uint8) PORT_SW_PATCH_VERSION;
+     a9e:	e9 81       	ldd	r30, Y+1	; 0x01
+     aa0:	fa 81       	ldd	r31, Y+2	; 0x02
+     aa2:	16 82       	std	Z+6, r1	; 0x06
+	}
+}
+     aa4:	0f 90       	pop	r0
+     aa6:	0f 90       	pop	r0
+     aa8:	cf 91       	pop	r28
+     aaa:	df 91       	pop	r29
+     aac:	08 95       	ret
+
+00000aae <Port_getPinNumberAndPortNumber>:
+ * 					 Port_Num - Pointer to where to store Port Number.
+ * Return value: None
+ * Description: Returns the port number and pin's number related to port.
+ ************************************************************************************/
+STATIC void Port_getPinNumberAndPortNumber(Port_PinType Pin,
+		Port_PinType *Pin_Num, Port_PinType *Port_Num) {
+     aae:	df 93       	push	r29
+     ab0:	cf 93       	push	r28
+     ab2:	00 d0       	rcall	.+0      	; 0xab4 <Port_getPinNumberAndPortNumber+0x6>
+     ab4:	00 d0       	rcall	.+0      	; 0xab6 <Port_getPinNumberAndPortNumber+0x8>
+     ab6:	0f 92       	push	r0
+     ab8:	cd b7       	in	r28, 0x3d	; 61
+     aba:	de b7       	in	r29, 0x3e	; 62
+     abc:	89 83       	std	Y+1, r24	; 0x01
+     abe:	7b 83       	std	Y+3, r23	; 0x03
+     ac0:	6a 83       	std	Y+2, r22	; 0x02
+     ac2:	5d 83       	std	Y+5, r21	; 0x05
+     ac4:	4c 83       	std	Y+4, r20	; 0x04
+	/* 1-check pin number to get port number by check range of every port
+	 * 2-get pin number related to port*/
+	if (Pin >= PORTA_PIN_START && Pin <= PORTA_PIN_END) {
+     ac6:	89 81       	ldd	r24, Y+1	; 0x01
+     ac8:	88 30       	cpi	r24, 0x08	; 8
+     aca:	40 f4       	brcc	.+16     	; 0xadc <Port_getPinNumberAndPortNumber+0x2e>
+		*Port_Num = PORTA_NUM;
+     acc:	ec 81       	ldd	r30, Y+4	; 0x04
+     ace:	fd 81       	ldd	r31, Y+5	; 0x05
+     ad0:	10 82       	st	Z, r1
+		*Pin_Num = Pin - PORTA_PIN_START;
+     ad2:	ea 81       	ldd	r30, Y+2	; 0x02
+     ad4:	fb 81       	ldd	r31, Y+3	; 0x03
+     ad6:	89 81       	ldd	r24, Y+1	; 0x01
+     ad8:	80 83       	st	Z, r24
+     ada:	2f c0       	rjmp	.+94     	; 0xb3a <Port_getPinNumberAndPortNumber+0x8c>
+	} else if (Pin >= PORTB_PIN_START && Pin <= PORTB_PIN_END) {
+     adc:	89 81       	ldd	r24, Y+1	; 0x01
+     ade:	88 30       	cpi	r24, 0x08	; 8
+     ae0:	68 f0       	brcs	.+26     	; 0xafc <Port_getPinNumberAndPortNumber+0x4e>
+     ae2:	89 81       	ldd	r24, Y+1	; 0x01
+     ae4:	80 31       	cpi	r24, 0x10	; 16
+     ae6:	50 f4       	brcc	.+20     	; 0xafc <Port_getPinNumberAndPortNumber+0x4e>
+		*Port_Num = PORTB_NUM;
+     ae8:	ec 81       	ldd	r30, Y+4	; 0x04
+     aea:	fd 81       	ldd	r31, Y+5	; 0x05
+     aec:	81 e0       	ldi	r24, 0x01	; 1
+     aee:	80 83       	st	Z, r24
+		*Pin_Num = Pin - PORTB_PIN_START;
+     af0:	89 81       	ldd	r24, Y+1	; 0x01
+     af2:	88 50       	subi	r24, 0x08	; 8
+     af4:	ea 81       	ldd	r30, Y+2	; 0x02
+     af6:	fb 81       	ldd	r31, Y+3	; 0x03
+     af8:	80 83       	st	Z, r24
+     afa:	1f c0       	rjmp	.+62     	; 0xb3a <Port_getPinNumberAndPortNumber+0x8c>
+	} else if (Pin >= PORTC_PIN_START && Pin <= PORTC_PIN_END) {
+     afc:	89 81       	ldd	r24, Y+1	; 0x01
+     afe:	80 31       	cpi	r24, 0x10	; 16
+     b00:	68 f0       	brcs	.+26     	; 0xb1c <Port_getPinNumberAndPortNumber+0x6e>
+     b02:	89 81       	ldd	r24, Y+1	; 0x01
+     b04:	88 31       	cpi	r24, 0x18	; 24
+     b06:	50 f4       	brcc	.+20     	; 0xb1c <Port_getPinNumberAndPortNumber+0x6e>
+		*Port_Num = PORTC_NUM;
+     b08:	ec 81       	ldd	r30, Y+4	; 0x04
+     b0a:	fd 81       	ldd	r31, Y+5	; 0x05
+     b0c:	82 e0       	ldi	r24, 0x02	; 2
+     b0e:	80 83       	st	Z, r24
+		*Pin_Num = Pin - PORTC_PIN_START;
+     b10:	89 81       	ldd	r24, Y+1	; 0x01
+     b12:	80 51       	subi	r24, 0x10	; 16
+     b14:	ea 81       	ldd	r30, Y+2	; 0x02
+     b16:	fb 81       	ldd	r31, Y+3	; 0x03
+     b18:	80 83       	st	Z, r24
+     b1a:	0f c0       	rjmp	.+30     	; 0xb3a <Port_getPinNumberAndPortNumber+0x8c>
+	} else if (Pin >= PORTD_PIN_START && Pin <= PORTD_PIN_END) {
+     b1c:	89 81       	ldd	r24, Y+1	; 0x01
+     b1e:	88 31       	cpi	r24, 0x18	; 24
+     b20:	60 f0       	brcs	.+24     	; 0xb3a <Port_getPinNumberAndPortNumber+0x8c>
+     b22:	89 81       	ldd	r24, Y+1	; 0x01
+     b24:	80 32       	cpi	r24, 0x20	; 32
+     b26:	48 f4       	brcc	.+18     	; 0xb3a <Port_getPinNumberAndPortNumber+0x8c>
+		*Port_Num = PORTD_NUM;
+     b28:	ec 81       	ldd	r30, Y+4	; 0x04
+     b2a:	fd 81       	ldd	r31, Y+5	; 0x05
+     b2c:	83 e0       	ldi	r24, 0x03	; 3
+     b2e:	80 83       	st	Z, r24
+		*Pin_Num = Pin - PORTD_PIN_START;
+     b30:	89 81       	ldd	r24, Y+1	; 0x01
+     b32:	88 51       	subi	r24, 0x18	; 24
+     b34:	ea 81       	ldd	r30, Y+2	; 0x02
+     b36:	fb 81       	ldd	r31, Y+3	; 0x03
+     b38:	80 83       	st	Z, r24
+	}
+}
+     b3a:	0f 90       	pop	r0
+     b3c:	0f 90       	pop	r0
+     b3e:	0f 90       	pop	r0
+     b40:	0f 90       	pop	r0
+     b42:	0f 90       	pop	r0
+     b44:	cf 91       	pop	r28
+     b46:	df 91       	pop	r29
+     b48:	08 95       	ret
+
+00000b4a <Port_setConfiguration>:
+ * Parameters (inout): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: responsible the set Configuration of every pin.
+ ************************************************************************************/
+STATIC void Port_setConfiguration() {
+     b4a:	df 93       	push	r29
+     b4c:	cf 93       	push	r28
+     b4e:	cd b7       	in	r28, 0x3d	; 61
+     b50:	de b7       	in	r29, 0x3e	; 62
+     b52:	28 97       	sbiw	r28, 0x08	; 8
+     b54:	0f b6       	in	r0, 0x3f	; 63
+     b56:	f8 94       	cli
+     b58:	de bf       	out	0x3e, r29	; 62
+     b5a:	0f be       	out	0x3f, r0	; 63
+     b5c:	cd bf       	out	0x3d, r28	; 61
+	Port_PinType *Port_Ptr = NULL_PTR;
+     b5e:	1e 82       	std	Y+6, r1	; 0x06
+     b60:	1d 82       	std	Y+5, r1	; 0x05
+	Port_PinType *DDR_Ptr = NULL_PTR;
+     b62:	1c 82       	std	Y+4, r1	; 0x04
+     b64:	1b 82       	std	Y+3, r1	; 0x03
+	for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     b66:	1a 82       	std	Y+2, r1	; 0x02
+     b68:	19 82       	std	Y+1, r1	; 0x01
+     b6a:	a2 c1       	rjmp	.+836    	; 0xeb0 <Port_setConfiguration+0x366>
+		switch (Port_PortChannels[i].port) {
+     b6c:	40 91 2b 01 	lds	r20, 0x012B
+     b70:	50 91 2c 01 	lds	r21, 0x012C
+     b74:	29 81       	ldd	r18, Y+1	; 0x01
+     b76:	3a 81       	ldd	r19, Y+2	; 0x02
+     b78:	c9 01       	movw	r24, r18
+     b7a:	88 0f       	add	r24, r24
+     b7c:	99 1f       	adc	r25, r25
+     b7e:	82 0f       	add	r24, r18
+     b80:	93 1f       	adc	r25, r19
+     b82:	88 0f       	add	r24, r24
+     b84:	99 1f       	adc	r25, r25
+     b86:	fa 01       	movw	r30, r20
+     b88:	e8 0f       	add	r30, r24
+     b8a:	f9 1f       	adc	r31, r25
+     b8c:	80 81       	ld	r24, Z
+     b8e:	28 2f       	mov	r18, r24
+     b90:	30 e0       	ldi	r19, 0x00	; 0
+     b92:	38 87       	std	Y+8, r19	; 0x08
+     b94:	2f 83       	std	Y+7, r18	; 0x07
+     b96:	8f 81       	ldd	r24, Y+7	; 0x07
+     b98:	98 85       	ldd	r25, Y+8	; 0x08
+     b9a:	81 30       	cpi	r24, 0x01	; 1
+     b9c:	91 05       	cpc	r25, r1
+     b9e:	f1 f0       	breq	.+60     	; 0xbdc <Port_setConfiguration+0x92>
+     ba0:	2f 81       	ldd	r18, Y+7	; 0x07
+     ba2:	38 85       	ldd	r19, Y+8	; 0x08
+     ba4:	22 30       	cpi	r18, 0x02	; 2
+     ba6:	31 05       	cpc	r19, r1
+     ba8:	2c f4       	brge	.+10     	; 0xbb4 <Port_setConfiguration+0x6a>
+     baa:	8f 81       	ldd	r24, Y+7	; 0x07
+     bac:	98 85       	ldd	r25, Y+8	; 0x08
+     bae:	00 97       	sbiw	r24, 0x00	; 0
+     bb0:	61 f0       	breq	.+24     	; 0xbca <Port_setConfiguration+0x80>
+     bb2:	2e c0       	rjmp	.+92     	; 0xc10 <Port_setConfiguration+0xc6>
+     bb4:	2f 81       	ldd	r18, Y+7	; 0x07
+     bb6:	38 85       	ldd	r19, Y+8	; 0x08
+     bb8:	22 30       	cpi	r18, 0x02	; 2
+     bba:	31 05       	cpc	r19, r1
+     bbc:	c1 f0       	breq	.+48     	; 0xbee <Port_setConfiguration+0xa4>
+     bbe:	8f 81       	ldd	r24, Y+7	; 0x07
+     bc0:	98 85       	ldd	r25, Y+8	; 0x08
+     bc2:	83 30       	cpi	r24, 0x03	; 3
+     bc4:	91 05       	cpc	r25, r1
+     bc6:	e1 f0       	breq	.+56     	; 0xc00 <Port_setConfiguration+0xb6>
+     bc8:	23 c0       	rjmp	.+70     	; 0xc10 <Port_setConfiguration+0xc6>
+		case 0:
+			Port_Ptr = &PORTA_REG;
+     bca:	8b e3       	ldi	r24, 0x3B	; 59
+     bcc:	90 e0       	ldi	r25, 0x00	; 0
+     bce:	9e 83       	std	Y+6, r25	; 0x06
+     bd0:	8d 83       	std	Y+5, r24	; 0x05
+			DDR_Ptr = &DDRA_REG;
+     bd2:	8a e3       	ldi	r24, 0x3A	; 58
+     bd4:	90 e0       	ldi	r25, 0x00	; 0
+     bd6:	9c 83       	std	Y+4, r25	; 0x04
+     bd8:	8b 83       	std	Y+3, r24	; 0x03
+     bda:	1a c0       	rjmp	.+52     	; 0xc10 <Port_setConfiguration+0xc6>
+			break;
+		case 1:
+			Port_Ptr = &PORTB_REG;
+     bdc:	88 e3       	ldi	r24, 0x38	; 56
+     bde:	90 e0       	ldi	r25, 0x00	; 0
+     be0:	9e 83       	std	Y+6, r25	; 0x06
+     be2:	8d 83       	std	Y+5, r24	; 0x05
+			DDR_Ptr = &DDRB_REG;
+     be4:	87 e3       	ldi	r24, 0x37	; 55
+     be6:	90 e0       	ldi	r25, 0x00	; 0
+     be8:	9c 83       	std	Y+4, r25	; 0x04
+     bea:	8b 83       	std	Y+3, r24	; 0x03
+     bec:	11 c0       	rjmp	.+34     	; 0xc10 <Port_setConfiguration+0xc6>
+			break;
+		case 2:
+			Port_Ptr = &PORTC_REG;
+     bee:	85 e3       	ldi	r24, 0x35	; 53
+     bf0:	90 e0       	ldi	r25, 0x00	; 0
+     bf2:	9e 83       	std	Y+6, r25	; 0x06
+     bf4:	8d 83       	std	Y+5, r24	; 0x05
+			DDR_Ptr = &DDRC_REG;
+     bf6:	84 e3       	ldi	r24, 0x34	; 52
+     bf8:	90 e0       	ldi	r25, 0x00	; 0
+     bfa:	9c 83       	std	Y+4, r25	; 0x04
+     bfc:	8b 83       	std	Y+3, r24	; 0x03
+     bfe:	08 c0       	rjmp	.+16     	; 0xc10 <Port_setConfiguration+0xc6>
+			break;
+		case 3:
+			Port_Ptr = &PORTD_REG;
+     c00:	82 e3       	ldi	r24, 0x32	; 50
+     c02:	90 e0       	ldi	r25, 0x00	; 0
+     c04:	9e 83       	std	Y+6, r25	; 0x06
+     c06:	8d 83       	std	Y+5, r24	; 0x05
+			DDR_Ptr = &DDRD_REG;
+     c08:	81 e3       	ldi	r24, 0x31	; 49
+     c0a:	90 e0       	ldi	r25, 0x00	; 0
+     c0c:	9c 83       	std	Y+4, r25	; 0x04
+     c0e:	8b 83       	std	Y+3, r24	; 0x03
+		}
+		/* 1-check and set Direction is input or output
+		 * 2-if PIN Direction is Output the value of InitialValue is initial value high/low
+		 * 3-if PIN Direction is Input  the value of InitialValue is Pull_up resistor enable/disable
+		 */
+		if (PORT_PIN_IN == Port_PortChannels[i].directionType) {
+     c10:	40 91 2b 01 	lds	r20, 0x012B
+     c14:	50 91 2c 01 	lds	r21, 0x012C
+     c18:	29 81       	ldd	r18, Y+1	; 0x01
+     c1a:	3a 81       	ldd	r19, Y+2	; 0x02
+     c1c:	c9 01       	movw	r24, r18
+     c1e:	88 0f       	add	r24, r24
+     c20:	99 1f       	adc	r25, r25
+     c22:	82 0f       	add	r24, r18
+     c24:	93 1f       	adc	r25, r19
+     c26:	88 0f       	add	r24, r24
+     c28:	99 1f       	adc	r25, r25
+     c2a:	fa 01       	movw	r30, r20
+     c2c:	e8 0f       	add	r30, r24
+     c2e:	f9 1f       	adc	r31, r25
+     c30:	82 81       	ldd	r24, Z+2	; 0x02
+     c32:	88 23       	and	r24, r24
+     c34:	09 f0       	breq	.+2      	; 0xc38 <Port_setConfiguration+0xee>
+     c36:	93 c0       	rjmp	.+294    	; 0xd5e <Port_setConfiguration+0x214>
+			CLEAR_BIT(*DDR_Ptr, Port_PortChannels[i].pin_num);
+     c38:	eb 81       	ldd	r30, Y+3	; 0x03
+     c3a:	fc 81       	ldd	r31, Y+4	; 0x04
+     c3c:	80 81       	ld	r24, Z
+     c3e:	68 2f       	mov	r22, r24
+     c40:	40 91 2b 01 	lds	r20, 0x012B
+     c44:	50 91 2c 01 	lds	r21, 0x012C
+     c48:	29 81       	ldd	r18, Y+1	; 0x01
+     c4a:	3a 81       	ldd	r19, Y+2	; 0x02
+     c4c:	c9 01       	movw	r24, r18
+     c4e:	88 0f       	add	r24, r24
+     c50:	99 1f       	adc	r25, r25
+     c52:	82 0f       	add	r24, r18
+     c54:	93 1f       	adc	r25, r19
+     c56:	88 0f       	add	r24, r24
+     c58:	99 1f       	adc	r25, r25
+     c5a:	fa 01       	movw	r30, r20
+     c5c:	e8 0f       	add	r30, r24
+     c5e:	f9 1f       	adc	r31, r25
+     c60:	81 81       	ldd	r24, Z+1	; 0x01
+     c62:	28 2f       	mov	r18, r24
+     c64:	30 e0       	ldi	r19, 0x00	; 0
+     c66:	81 e0       	ldi	r24, 0x01	; 1
+     c68:	90 e0       	ldi	r25, 0x00	; 0
+     c6a:	02 c0       	rjmp	.+4      	; 0xc70 <Port_setConfiguration+0x126>
+     c6c:	88 0f       	add	r24, r24
+     c6e:	99 1f       	adc	r25, r25
+     c70:	2a 95       	dec	r18
+     c72:	e2 f7       	brpl	.-8      	; 0xc6c <Port_setConfiguration+0x122>
+     c74:	80 95       	com	r24
+     c76:	86 23       	and	r24, r22
+     c78:	eb 81       	ldd	r30, Y+3	; 0x03
+     c7a:	fc 81       	ldd	r31, Y+4	; 0x04
+     c7c:	80 83       	st	Z, r24
+			//Enable/Disable Pull_up
+			if (PIN_MODE_LOW == Port_PortChannels[i].initialValue) { //Disable Pull Up
+     c7e:	40 91 2b 01 	lds	r20, 0x012B
+     c82:	50 91 2c 01 	lds	r21, 0x012C
+     c86:	29 81       	ldd	r18, Y+1	; 0x01
+     c88:	3a 81       	ldd	r19, Y+2	; 0x02
+     c8a:	c9 01       	movw	r24, r18
+     c8c:	88 0f       	add	r24, r24
+     c8e:	99 1f       	adc	r25, r25
+     c90:	82 0f       	add	r24, r18
+     c92:	93 1f       	adc	r25, r19
+     c94:	88 0f       	add	r24, r24
+     c96:	99 1f       	adc	r25, r25
+     c98:	fa 01       	movw	r30, r20
+     c9a:	e8 0f       	add	r30, r24
+     c9c:	f9 1f       	adc	r31, r25
+     c9e:	83 81       	ldd	r24, Z+3	; 0x03
+     ca0:	88 23       	and	r24, r24
+     ca2:	29 f5       	brne	.+74     	; 0xcee <Port_setConfiguration+0x1a4>
+				CLEAR_BIT(*Port_Ptr, Port_PortChannels[i].pin_num);
+     ca4:	ed 81       	ldd	r30, Y+5	; 0x05
+     ca6:	fe 81       	ldd	r31, Y+6	; 0x06
+     ca8:	80 81       	ld	r24, Z
+     caa:	68 2f       	mov	r22, r24
+     cac:	40 91 2b 01 	lds	r20, 0x012B
+     cb0:	50 91 2c 01 	lds	r21, 0x012C
+     cb4:	29 81       	ldd	r18, Y+1	; 0x01
+     cb6:	3a 81       	ldd	r19, Y+2	; 0x02
+     cb8:	c9 01       	movw	r24, r18
+     cba:	88 0f       	add	r24, r24
+     cbc:	99 1f       	adc	r25, r25
+     cbe:	82 0f       	add	r24, r18
+     cc0:	93 1f       	adc	r25, r19
+     cc2:	88 0f       	add	r24, r24
+     cc4:	99 1f       	adc	r25, r25
+     cc6:	fa 01       	movw	r30, r20
+     cc8:	e8 0f       	add	r30, r24
+     cca:	f9 1f       	adc	r31, r25
+     ccc:	81 81       	ldd	r24, Z+1	; 0x01
+     cce:	28 2f       	mov	r18, r24
+     cd0:	30 e0       	ldi	r19, 0x00	; 0
+     cd2:	81 e0       	ldi	r24, 0x01	; 1
+     cd4:	90 e0       	ldi	r25, 0x00	; 0
+     cd6:	02 2e       	mov	r0, r18
+     cd8:	02 c0       	rjmp	.+4      	; 0xcde <Port_setConfiguration+0x194>
+     cda:	88 0f       	add	r24, r24
+     cdc:	99 1f       	adc	r25, r25
+     cde:	0a 94       	dec	r0
+     ce0:	e2 f7       	brpl	.-8      	; 0xcda <Port_setConfiguration+0x190>
+     ce2:	80 95       	com	r24
+     ce4:	86 23       	and	r24, r22
+     ce6:	ed 81       	ldd	r30, Y+5	; 0x05
+     ce8:	fe 81       	ldd	r31, Y+6	; 0x06
+     cea:	80 83       	st	Z, r24
+     cec:	dc c0       	rjmp	.+440    	; 0xea6 <Port_setConfiguration+0x35c>
+			} else if (PIN_MODE_High == Port_PortChannels[i].initialValue) { //Enable Pull Up
+     cee:	40 91 2b 01 	lds	r20, 0x012B
+     cf2:	50 91 2c 01 	lds	r21, 0x012C
+     cf6:	29 81       	ldd	r18, Y+1	; 0x01
+     cf8:	3a 81       	ldd	r19, Y+2	; 0x02
+     cfa:	c9 01       	movw	r24, r18
+     cfc:	88 0f       	add	r24, r24
+     cfe:	99 1f       	adc	r25, r25
+     d00:	82 0f       	add	r24, r18
+     d02:	93 1f       	adc	r25, r19
+     d04:	88 0f       	add	r24, r24
+     d06:	99 1f       	adc	r25, r25
+     d08:	fa 01       	movw	r30, r20
+     d0a:	e8 0f       	add	r30, r24
+     d0c:	f9 1f       	adc	r31, r25
+     d0e:	83 81       	ldd	r24, Z+3	; 0x03
+     d10:	81 30       	cpi	r24, 0x01	; 1
+     d12:	09 f0       	breq	.+2      	; 0xd16 <Port_setConfiguration+0x1cc>
+     d14:	c8 c0       	rjmp	.+400    	; 0xea6 <Port_setConfiguration+0x35c>
+				SET_BIT(*Port_Ptr, Port_PortChannels[i].pin_num);
+     d16:	ed 81       	ldd	r30, Y+5	; 0x05
+     d18:	fe 81       	ldd	r31, Y+6	; 0x06
+     d1a:	80 81       	ld	r24, Z
+     d1c:	68 2f       	mov	r22, r24
+     d1e:	40 91 2b 01 	lds	r20, 0x012B
+     d22:	50 91 2c 01 	lds	r21, 0x012C
+     d26:	29 81       	ldd	r18, Y+1	; 0x01
+     d28:	3a 81       	ldd	r19, Y+2	; 0x02
+     d2a:	c9 01       	movw	r24, r18
+     d2c:	88 0f       	add	r24, r24
+     d2e:	99 1f       	adc	r25, r25
+     d30:	82 0f       	add	r24, r18
+     d32:	93 1f       	adc	r25, r19
+     d34:	88 0f       	add	r24, r24
+     d36:	99 1f       	adc	r25, r25
+     d38:	fa 01       	movw	r30, r20
+     d3a:	e8 0f       	add	r30, r24
+     d3c:	f9 1f       	adc	r31, r25
+     d3e:	81 81       	ldd	r24, Z+1	; 0x01
+     d40:	28 2f       	mov	r18, r24
+     d42:	30 e0       	ldi	r19, 0x00	; 0
+     d44:	81 e0       	ldi	r24, 0x01	; 1
+     d46:	90 e0       	ldi	r25, 0x00	; 0
+     d48:	02 2e       	mov	r0, r18
+     d4a:	02 c0       	rjmp	.+4      	; 0xd50 <Port_setConfiguration+0x206>
+     d4c:	88 0f       	add	r24, r24
+     d4e:	99 1f       	adc	r25, r25
+     d50:	0a 94       	dec	r0
+     d52:	e2 f7       	brpl	.-8      	; 0xd4c <Port_setConfiguration+0x202>
+     d54:	86 2b       	or	r24, r22
+     d56:	ed 81       	ldd	r30, Y+5	; 0x05
+     d58:	fe 81       	ldd	r31, Y+6	; 0x06
+     d5a:	80 83       	st	Z, r24
+     d5c:	a4 c0       	rjmp	.+328    	; 0xea6 <Port_setConfiguration+0x35c>
+			} else {
+
+			}
+
+		} else if (PORT_PIN_OUT == Port_PortChannels[i].directionType) {
+     d5e:	40 91 2b 01 	lds	r20, 0x012B
+     d62:	50 91 2c 01 	lds	r21, 0x012C
+     d66:	29 81       	ldd	r18, Y+1	; 0x01
+     d68:	3a 81       	ldd	r19, Y+2	; 0x02
+     d6a:	c9 01       	movw	r24, r18
+     d6c:	88 0f       	add	r24, r24
+     d6e:	99 1f       	adc	r25, r25
+     d70:	82 0f       	add	r24, r18
+     d72:	93 1f       	adc	r25, r19
+     d74:	88 0f       	add	r24, r24
+     d76:	99 1f       	adc	r25, r25
+     d78:	fa 01       	movw	r30, r20
+     d7a:	e8 0f       	add	r30, r24
+     d7c:	f9 1f       	adc	r31, r25
+     d7e:	82 81       	ldd	r24, Z+2	; 0x02
+     d80:	81 30       	cpi	r24, 0x01	; 1
+     d82:	09 f0       	breq	.+2      	; 0xd86 <Port_setConfiguration+0x23c>
+     d84:	90 c0       	rjmp	.+288    	; 0xea6 <Port_setConfiguration+0x35c>
+			SET_BIT(*DDR_Ptr, Port_PortChannels[i].pin_num);
+     d86:	eb 81       	ldd	r30, Y+3	; 0x03
+     d88:	fc 81       	ldd	r31, Y+4	; 0x04
+     d8a:	80 81       	ld	r24, Z
+     d8c:	68 2f       	mov	r22, r24
+     d8e:	40 91 2b 01 	lds	r20, 0x012B
+     d92:	50 91 2c 01 	lds	r21, 0x012C
+     d96:	29 81       	ldd	r18, Y+1	; 0x01
+     d98:	3a 81       	ldd	r19, Y+2	; 0x02
+     d9a:	c9 01       	movw	r24, r18
+     d9c:	88 0f       	add	r24, r24
+     d9e:	99 1f       	adc	r25, r25
+     da0:	82 0f       	add	r24, r18
+     da2:	93 1f       	adc	r25, r19
+     da4:	88 0f       	add	r24, r24
+     da6:	99 1f       	adc	r25, r25
+     da8:	fa 01       	movw	r30, r20
+     daa:	e8 0f       	add	r30, r24
+     dac:	f9 1f       	adc	r31, r25
+     dae:	81 81       	ldd	r24, Z+1	; 0x01
+     db0:	28 2f       	mov	r18, r24
+     db2:	30 e0       	ldi	r19, 0x00	; 0
+     db4:	81 e0       	ldi	r24, 0x01	; 1
+     db6:	90 e0       	ldi	r25, 0x00	; 0
+     db8:	02 c0       	rjmp	.+4      	; 0xdbe <Port_setConfiguration+0x274>
+     dba:	88 0f       	add	r24, r24
+     dbc:	99 1f       	adc	r25, r25
+     dbe:	2a 95       	dec	r18
+     dc0:	e2 f7       	brpl	.-8      	; 0xdba <Port_setConfiguration+0x270>
+     dc2:	86 2b       	or	r24, r22
+     dc4:	eb 81       	ldd	r30, Y+3	; 0x03
+     dc6:	fc 81       	ldd	r31, Y+4	; 0x04
+     dc8:	80 83       	st	Z, r24
+			//SET initial value lOW/high
+			if (PIN_MODE_LOW == Port_PortChannels[i].initialValue) { //SET initial value lOW
+     dca:	40 91 2b 01 	lds	r20, 0x012B
+     dce:	50 91 2c 01 	lds	r21, 0x012C
+     dd2:	29 81       	ldd	r18, Y+1	; 0x01
+     dd4:	3a 81       	ldd	r19, Y+2	; 0x02
+     dd6:	c9 01       	movw	r24, r18
+     dd8:	88 0f       	add	r24, r24
+     dda:	99 1f       	adc	r25, r25
+     ddc:	82 0f       	add	r24, r18
+     dde:	93 1f       	adc	r25, r19
+     de0:	88 0f       	add	r24, r24
+     de2:	99 1f       	adc	r25, r25
+     de4:	fa 01       	movw	r30, r20
+     de6:	e8 0f       	add	r30, r24
+     de8:	f9 1f       	adc	r31, r25
+     dea:	83 81       	ldd	r24, Z+3	; 0x03
+     dec:	88 23       	and	r24, r24
+     dee:	29 f5       	brne	.+74     	; 0xe3a <Port_setConfiguration+0x2f0>
+				CLEAR_BIT(*Port_Ptr, Port_PortChannels[i].pin_num);
+     df0:	ed 81       	ldd	r30, Y+5	; 0x05
+     df2:	fe 81       	ldd	r31, Y+6	; 0x06
+     df4:	80 81       	ld	r24, Z
+     df6:	68 2f       	mov	r22, r24
+     df8:	40 91 2b 01 	lds	r20, 0x012B
+     dfc:	50 91 2c 01 	lds	r21, 0x012C
+     e00:	29 81       	ldd	r18, Y+1	; 0x01
+     e02:	3a 81       	ldd	r19, Y+2	; 0x02
+     e04:	c9 01       	movw	r24, r18
+     e06:	88 0f       	add	r24, r24
+     e08:	99 1f       	adc	r25, r25
+     e0a:	82 0f       	add	r24, r18
+     e0c:	93 1f       	adc	r25, r19
+     e0e:	88 0f       	add	r24, r24
+     e10:	99 1f       	adc	r25, r25
+     e12:	fa 01       	movw	r30, r20
+     e14:	e8 0f       	add	r30, r24
+     e16:	f9 1f       	adc	r31, r25
+     e18:	81 81       	ldd	r24, Z+1	; 0x01
+     e1a:	28 2f       	mov	r18, r24
+     e1c:	30 e0       	ldi	r19, 0x00	; 0
+     e1e:	81 e0       	ldi	r24, 0x01	; 1
+     e20:	90 e0       	ldi	r25, 0x00	; 0
+     e22:	02 2e       	mov	r0, r18
+     e24:	02 c0       	rjmp	.+4      	; 0xe2a <Port_setConfiguration+0x2e0>
+     e26:	88 0f       	add	r24, r24
+     e28:	99 1f       	adc	r25, r25
+     e2a:	0a 94       	dec	r0
+     e2c:	e2 f7       	brpl	.-8      	; 0xe26 <Port_setConfiguration+0x2dc>
+     e2e:	80 95       	com	r24
+     e30:	86 23       	and	r24, r22
+     e32:	ed 81       	ldd	r30, Y+5	; 0x05
+     e34:	fe 81       	ldd	r31, Y+6	; 0x06
+     e36:	80 83       	st	Z, r24
+     e38:	36 c0       	rjmp	.+108    	; 0xea6 <Port_setConfiguration+0x35c>
+			} else if (PIN_MODE_High == Port_PortChannels[i].initialValue) { //SET initial value HIGH
+     e3a:	40 91 2b 01 	lds	r20, 0x012B
+     e3e:	50 91 2c 01 	lds	r21, 0x012C
+     e42:	29 81       	ldd	r18, Y+1	; 0x01
+     e44:	3a 81       	ldd	r19, Y+2	; 0x02
+     e46:	c9 01       	movw	r24, r18
+     e48:	88 0f       	add	r24, r24
+     e4a:	99 1f       	adc	r25, r25
+     e4c:	82 0f       	add	r24, r18
+     e4e:	93 1f       	adc	r25, r19
+     e50:	88 0f       	add	r24, r24
+     e52:	99 1f       	adc	r25, r25
+     e54:	fa 01       	movw	r30, r20
+     e56:	e8 0f       	add	r30, r24
+     e58:	f9 1f       	adc	r31, r25
+     e5a:	83 81       	ldd	r24, Z+3	; 0x03
+     e5c:	81 30       	cpi	r24, 0x01	; 1
+     e5e:	19 f5       	brne	.+70     	; 0xea6 <Port_setConfiguration+0x35c>
+				SET_BIT(*Port_Ptr, Port_PortChannels[i].pin_num);
+     e60:	ed 81       	ldd	r30, Y+5	; 0x05
+     e62:	fe 81       	ldd	r31, Y+6	; 0x06
+     e64:	80 81       	ld	r24, Z
+     e66:	68 2f       	mov	r22, r24
+     e68:	40 91 2b 01 	lds	r20, 0x012B
+     e6c:	50 91 2c 01 	lds	r21, 0x012C
+     e70:	29 81       	ldd	r18, Y+1	; 0x01
+     e72:	3a 81       	ldd	r19, Y+2	; 0x02
+     e74:	c9 01       	movw	r24, r18
+     e76:	88 0f       	add	r24, r24
+     e78:	99 1f       	adc	r25, r25
+     e7a:	82 0f       	add	r24, r18
+     e7c:	93 1f       	adc	r25, r19
+     e7e:	88 0f       	add	r24, r24
+     e80:	99 1f       	adc	r25, r25
+     e82:	fa 01       	movw	r30, r20
+     e84:	e8 0f       	add	r30, r24
+     e86:	f9 1f       	adc	r31, r25
+     e88:	81 81       	ldd	r24, Z+1	; 0x01
+     e8a:	28 2f       	mov	r18, r24
+     e8c:	30 e0       	ldi	r19, 0x00	; 0
+     e8e:	81 e0       	ldi	r24, 0x01	; 1
+     e90:	90 e0       	ldi	r25, 0x00	; 0
+     e92:	02 2e       	mov	r0, r18
+     e94:	02 c0       	rjmp	.+4      	; 0xe9a <Port_setConfiguration+0x350>
+     e96:	88 0f       	add	r24, r24
+     e98:	99 1f       	adc	r25, r25
+     e9a:	0a 94       	dec	r0
+     e9c:	e2 f7       	brpl	.-8      	; 0xe96 <Port_setConfiguration+0x34c>
+     e9e:	86 2b       	or	r24, r22
+     ea0:	ed 81       	ldd	r30, Y+5	; 0x05
+     ea2:	fe 81       	ldd	r31, Y+6	; 0x06
+     ea4:	80 83       	st	Z, r24
+ * Description: responsible the set Configuration of every pin.
+ ************************************************************************************/
+STATIC void Port_setConfiguration() {
+	Port_PinType *Port_Ptr = NULL_PTR;
+	Port_PinType *DDR_Ptr = NULL_PTR;
+	for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     ea6:	89 81       	ldd	r24, Y+1	; 0x01
+     ea8:	9a 81       	ldd	r25, Y+2	; 0x02
+     eaa:	01 96       	adiw	r24, 0x01	; 1
+     eac:	9a 83       	std	Y+2, r25	; 0x02
+     eae:	89 83       	std	Y+1, r24	; 0x01
+     eb0:	89 81       	ldd	r24, Y+1	; 0x01
+     eb2:	9a 81       	ldd	r25, Y+2	; 0x02
+     eb4:	80 32       	cpi	r24, 0x20	; 32
+     eb6:	91 05       	cpc	r25, r1
+     eb8:	08 f4       	brcc	.+2      	; 0xebc <Port_setConfiguration+0x372>
+     eba:	58 ce       	rjmp	.-848    	; 0xb6c <Port_setConfiguration+0x22>
+
+		} else {
+
+		}
+	}
+}
+     ebc:	28 96       	adiw	r28, 0x08	; 8
+     ebe:	0f b6       	in	r0, 0x3f	; 63
+     ec0:	f8 94       	cli
+     ec2:	de bf       	out	0x3e, r29	; 62
+     ec4:	0f be       	out	0x3f, r0	; 63
+     ec6:	cd bf       	out	0x3d, r28	; 61
+     ec8:	cf 91       	pop	r28
+     eca:	df 91       	pop	r29
+     ecc:	08 95       	ret
+
+00000ece <Port_setDirection>:
+ * Parameters (inout): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: responsible the set Direction of every pin.
+ ************************************************************************************/
+STATIC void Port_setDirection() {
+     ece:	df 93       	push	r29
+     ed0:	cf 93       	push	r28
+     ed2:	00 d0       	rcall	.+0      	; 0xed4 <Port_setDirection+0x6>
+     ed4:	00 d0       	rcall	.+0      	; 0xed6 <Port_setDirection+0x8>
+     ed6:	00 d0       	rcall	.+0      	; 0xed8 <Port_setDirection+0xa>
+     ed8:	cd b7       	in	r28, 0x3d	; 61
+     eda:	de b7       	in	r29, 0x3e	; 62
+	Port_PinType *DDR_Ptr = NULL_PTR;
+     edc:	1c 82       	std	Y+4, r1	; 0x04
+     ede:	1b 82       	std	Y+3, r1	; 0x03
+	for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+     ee0:	1a 82       	std	Y+2, r1	; 0x02
+     ee2:	19 82       	std	Y+1, r1	; 0x01
+     ee4:	b5 c0       	rjmp	.+362    	; 0x1050 <Port_setDirection+0x182>
+		switch (Port_PortChannels[i].port) {
+     ee6:	40 91 2b 01 	lds	r20, 0x012B
+     eea:	50 91 2c 01 	lds	r21, 0x012C
+     eee:	29 81       	ldd	r18, Y+1	; 0x01
+     ef0:	3a 81       	ldd	r19, Y+2	; 0x02
+     ef2:	c9 01       	movw	r24, r18
+     ef4:	88 0f       	add	r24, r24
+     ef6:	99 1f       	adc	r25, r25
+     ef8:	82 0f       	add	r24, r18
+     efa:	93 1f       	adc	r25, r19
+     efc:	88 0f       	add	r24, r24
+     efe:	99 1f       	adc	r25, r25
+     f00:	fa 01       	movw	r30, r20
+     f02:	e8 0f       	add	r30, r24
+     f04:	f9 1f       	adc	r31, r25
+     f06:	80 81       	ld	r24, Z
+     f08:	28 2f       	mov	r18, r24
+     f0a:	30 e0       	ldi	r19, 0x00	; 0
+     f0c:	3e 83       	std	Y+6, r19	; 0x06
+     f0e:	2d 83       	std	Y+5, r18	; 0x05
+     f10:	8d 81       	ldd	r24, Y+5	; 0x05
+     f12:	9e 81       	ldd	r25, Y+6	; 0x06
+     f14:	81 30       	cpi	r24, 0x01	; 1
+     f16:	91 05       	cpc	r25, r1
+     f18:	d1 f0       	breq	.+52     	; 0xf4e <Port_setDirection+0x80>
+     f1a:	2d 81       	ldd	r18, Y+5	; 0x05
+     f1c:	3e 81       	ldd	r19, Y+6	; 0x06
+     f1e:	22 30       	cpi	r18, 0x02	; 2
+     f20:	31 05       	cpc	r19, r1
+     f22:	2c f4       	brge	.+10     	; 0xf2e <Port_setDirection+0x60>
+     f24:	8d 81       	ldd	r24, Y+5	; 0x05
+     f26:	9e 81       	ldd	r25, Y+6	; 0x06
+     f28:	00 97       	sbiw	r24, 0x00	; 0
+     f2a:	61 f0       	breq	.+24     	; 0xf44 <Port_setDirection+0x76>
+     f2c:	1e c0       	rjmp	.+60     	; 0xf6a <Port_setDirection+0x9c>
+     f2e:	2d 81       	ldd	r18, Y+5	; 0x05
+     f30:	3e 81       	ldd	r19, Y+6	; 0x06
+     f32:	22 30       	cpi	r18, 0x02	; 2
+     f34:	31 05       	cpc	r19, r1
+     f36:	81 f0       	breq	.+32     	; 0xf58 <Port_setDirection+0x8a>
+     f38:	8d 81       	ldd	r24, Y+5	; 0x05
+     f3a:	9e 81       	ldd	r25, Y+6	; 0x06
+     f3c:	83 30       	cpi	r24, 0x03	; 3
+     f3e:	91 05       	cpc	r25, r1
+     f40:	81 f0       	breq	.+32     	; 0xf62 <Port_setDirection+0x94>
+     f42:	13 c0       	rjmp	.+38     	; 0xf6a <Port_setDirection+0x9c>
+		case 0:
+			DDR_Ptr = &DDRA_REG;
+     f44:	8a e3       	ldi	r24, 0x3A	; 58
+     f46:	90 e0       	ldi	r25, 0x00	; 0
+     f48:	9c 83       	std	Y+4, r25	; 0x04
+     f4a:	8b 83       	std	Y+3, r24	; 0x03
+     f4c:	0e c0       	rjmp	.+28     	; 0xf6a <Port_setDirection+0x9c>
+			break;
+		case 1:
+			DDR_Ptr = &DDRB_REG;
+     f4e:	87 e3       	ldi	r24, 0x37	; 55
+     f50:	90 e0       	ldi	r25, 0x00	; 0
+     f52:	9c 83       	std	Y+4, r25	; 0x04
+     f54:	8b 83       	std	Y+3, r24	; 0x03
+     f56:	09 c0       	rjmp	.+18     	; 0xf6a <Port_setDirection+0x9c>
+			break;
+		case 2:
+			DDR_Ptr = &DDRC_REG;
+     f58:	84 e3       	ldi	r24, 0x34	; 52
+     f5a:	90 e0       	ldi	r25, 0x00	; 0
+     f5c:	9c 83       	std	Y+4, r25	; 0x04
+     f5e:	8b 83       	std	Y+3, r24	; 0x03
+     f60:	04 c0       	rjmp	.+8      	; 0xf6a <Port_setDirection+0x9c>
+			break;
+		case 3:
+			DDR_Ptr = &DDRD_REG;
+     f62:	81 e3       	ldi	r24, 0x31	; 49
+     f64:	90 e0       	ldi	r25, 0x00	; 0
+     f66:	9c 83       	std	Y+4, r25	; 0x04
+     f68:	8b 83       	std	Y+3, r24	; 0x03
+			break;
+		}
+		/*check and set Direction is input or output*/
+		if (PORT_PIN_IN == Port_PortChannels[i].directionType) {
+     f6a:	40 91 2b 01 	lds	r20, 0x012B
+     f6e:	50 91 2c 01 	lds	r21, 0x012C
+     f72:	29 81       	ldd	r18, Y+1	; 0x01
+     f74:	3a 81       	ldd	r19, Y+2	; 0x02
+     f76:	c9 01       	movw	r24, r18
+     f78:	88 0f       	add	r24, r24
+     f7a:	99 1f       	adc	r25, r25
+     f7c:	82 0f       	add	r24, r18
+     f7e:	93 1f       	adc	r25, r19
+     f80:	88 0f       	add	r24, r24
+     f82:	99 1f       	adc	r25, r25
+     f84:	fa 01       	movw	r30, r20
+     f86:	e8 0f       	add	r30, r24
+     f88:	f9 1f       	adc	r31, r25
+     f8a:	82 81       	ldd	r24, Z+2	; 0x02
+     f8c:	88 23       	and	r24, r24
+     f8e:	29 f5       	brne	.+74     	; 0xfda <Port_setDirection+0x10c>
+			CLEAR_BIT(*DDR_Ptr, Port_PortChannels[i].pin_num);
+     f90:	eb 81       	ldd	r30, Y+3	; 0x03
+     f92:	fc 81       	ldd	r31, Y+4	; 0x04
+     f94:	80 81       	ld	r24, Z
+     f96:	68 2f       	mov	r22, r24
+     f98:	40 91 2b 01 	lds	r20, 0x012B
+     f9c:	50 91 2c 01 	lds	r21, 0x012C
+     fa0:	29 81       	ldd	r18, Y+1	; 0x01
+     fa2:	3a 81       	ldd	r19, Y+2	; 0x02
+     fa4:	c9 01       	movw	r24, r18
+     fa6:	88 0f       	add	r24, r24
+     fa8:	99 1f       	adc	r25, r25
+     faa:	82 0f       	add	r24, r18
+     fac:	93 1f       	adc	r25, r19
+     fae:	88 0f       	add	r24, r24
+     fb0:	99 1f       	adc	r25, r25
+     fb2:	fa 01       	movw	r30, r20
+     fb4:	e8 0f       	add	r30, r24
+     fb6:	f9 1f       	adc	r31, r25
+     fb8:	81 81       	ldd	r24, Z+1	; 0x01
+     fba:	28 2f       	mov	r18, r24
+     fbc:	30 e0       	ldi	r19, 0x00	; 0
+     fbe:	81 e0       	ldi	r24, 0x01	; 1
+     fc0:	90 e0       	ldi	r25, 0x00	; 0
+     fc2:	02 2e       	mov	r0, r18
+     fc4:	02 c0       	rjmp	.+4      	; 0xfca <Port_setDirection+0xfc>
+     fc6:	88 0f       	add	r24, r24
+     fc8:	99 1f       	adc	r25, r25
+     fca:	0a 94       	dec	r0
+     fcc:	e2 f7       	brpl	.-8      	; 0xfc6 <Port_setDirection+0xf8>
+     fce:	80 95       	com	r24
+     fd0:	86 23       	and	r24, r22
+     fd2:	eb 81       	ldd	r30, Y+3	; 0x03
+     fd4:	fc 81       	ldd	r31, Y+4	; 0x04
+     fd6:	80 83       	st	Z, r24
+     fd8:	36 c0       	rjmp	.+108    	; 0x1046 <Port_setDirection+0x178>
+
+		} else if (PORT_PIN_OUT == Port_PortChannels[i].directionType) {
+     fda:	40 91 2b 01 	lds	r20, 0x012B
+     fde:	50 91 2c 01 	lds	r21, 0x012C
+     fe2:	29 81       	ldd	r18, Y+1	; 0x01
+     fe4:	3a 81       	ldd	r19, Y+2	; 0x02
+     fe6:	c9 01       	movw	r24, r18
+     fe8:	88 0f       	add	r24, r24
+     fea:	99 1f       	adc	r25, r25
+     fec:	82 0f       	add	r24, r18
+     fee:	93 1f       	adc	r25, r19
+     ff0:	88 0f       	add	r24, r24
+     ff2:	99 1f       	adc	r25, r25
+     ff4:	fa 01       	movw	r30, r20
+     ff6:	e8 0f       	add	r30, r24
+     ff8:	f9 1f       	adc	r31, r25
+     ffa:	82 81       	ldd	r24, Z+2	; 0x02
+     ffc:	81 30       	cpi	r24, 0x01	; 1
+     ffe:	19 f5       	brne	.+70     	; 0x1046 <Port_setDirection+0x178>
+			SET_BIT(*DDR_Ptr, Port_PortChannels[i].pin_num);
+    1000:	eb 81       	ldd	r30, Y+3	; 0x03
+    1002:	fc 81       	ldd	r31, Y+4	; 0x04
+    1004:	80 81       	ld	r24, Z
+    1006:	68 2f       	mov	r22, r24
+    1008:	40 91 2b 01 	lds	r20, 0x012B
+    100c:	50 91 2c 01 	lds	r21, 0x012C
+    1010:	29 81       	ldd	r18, Y+1	; 0x01
+    1012:	3a 81       	ldd	r19, Y+2	; 0x02
+    1014:	c9 01       	movw	r24, r18
+    1016:	88 0f       	add	r24, r24
+    1018:	99 1f       	adc	r25, r25
+    101a:	82 0f       	add	r24, r18
+    101c:	93 1f       	adc	r25, r19
+    101e:	88 0f       	add	r24, r24
+    1020:	99 1f       	adc	r25, r25
+    1022:	fa 01       	movw	r30, r20
+    1024:	e8 0f       	add	r30, r24
+    1026:	f9 1f       	adc	r31, r25
+    1028:	81 81       	ldd	r24, Z+1	; 0x01
+    102a:	28 2f       	mov	r18, r24
+    102c:	30 e0       	ldi	r19, 0x00	; 0
+    102e:	81 e0       	ldi	r24, 0x01	; 1
+    1030:	90 e0       	ldi	r25, 0x00	; 0
+    1032:	02 2e       	mov	r0, r18
+    1034:	02 c0       	rjmp	.+4      	; 0x103a <Port_setDirection+0x16c>
+    1036:	88 0f       	add	r24, r24
+    1038:	99 1f       	adc	r25, r25
+    103a:	0a 94       	dec	r0
+    103c:	e2 f7       	brpl	.-8      	; 0x1036 <Port_setDirection+0x168>
+    103e:	86 2b       	or	r24, r22
+    1040:	eb 81       	ldd	r30, Y+3	; 0x03
+    1042:	fc 81       	ldd	r31, Y+4	; 0x04
+    1044:	80 83       	st	Z, r24
+ * Return value: None
+ * Description: responsible the set Direction of every pin.
+ ************************************************************************************/
+STATIC void Port_setDirection() {
+	Port_PinType *DDR_Ptr = NULL_PTR;
+	for (int i = 0; i < PORT_CONFIGURED_CHANNLES; ++i) {
+    1046:	89 81       	ldd	r24, Y+1	; 0x01
+    1048:	9a 81       	ldd	r25, Y+2	; 0x02
+    104a:	01 96       	adiw	r24, 0x01	; 1
+    104c:	9a 83       	std	Y+2, r25	; 0x02
+    104e:	89 83       	std	Y+1, r24	; 0x01
+    1050:	89 81       	ldd	r24, Y+1	; 0x01
+    1052:	9a 81       	ldd	r25, Y+2	; 0x02
+    1054:	80 32       	cpi	r24, 0x20	; 32
+    1056:	91 05       	cpc	r25, r1
+    1058:	08 f4       	brcc	.+2      	; 0x105c <Port_setDirection+0x18e>
+    105a:	45 cf       	rjmp	.-374    	; 0xee6 <Port_setDirection+0x18>
+			SET_BIT(*DDR_Ptr, Port_PortChannels[i].pin_num);
+		} else {
+
+		}
+	}
+}
+    105c:	26 96       	adiw	r28, 0x06	; 6
+    105e:	0f b6       	in	r0, 0x3f	; 63
+    1060:	f8 94       	cli
+    1062:	de bf       	out	0x3e, r29	; 62
+    1064:	0f be       	out	0x3f, r0	; 63
+    1066:	cd bf       	out	0x3d, r28	; 61
+    1068:	cf 91       	pop	r28
+    106a:	df 91       	pop	r29
+    106c:	08 95       	ret
+
+0000106e <_exit>:
+    106e:	f8 94       	cli
+
+00001070 <__stop_program>:
+    1070:	ff cf       	rjmp	.-2      	; 0x1070 <__stop_program>
